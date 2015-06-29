@@ -1,0 +1,176 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>CSS3属性选择器</title>
+<meta charset="gb2312" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="format-detection" content="telephone=yes"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/global.css" />
+<link type="text/css" rel="stylesheet" href="../resource/css/shCoreDefault.css"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/layout.css" />
+<script src="../resource/js/jquery.js"></script>
+<script src="../resource/js/layout.js"></script>
+<script src="../resource/js/shCore.js"></script>
+<script src="../resource/js/shBrushJScript.js"></script>
+<script src="../resource/js/shBrushCss.js"></script>
+<script src="../resource/js/shBrushXml.js"></script>
+</head>
+<body>
+
+
+
+<div id="Wrap" class="wrap">
+	<h1 id="WTitle" class="w-title">CSS3属性选择器</h1>
+	<div id="WBody" class="w-body">
+		<div class="w-cont"><!--  内容开始  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">浏览器支持</strong></dt>
+                                    <dd>
+                                            Internet Explorer 7+、Firefox、Chrome、Safari 以及 Opera 支持。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream">获取到</p>
+<p data="hh">获取到</p>
+<p data="bb">获取到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            通过该属性选择器可以获取含<strong class="font-tag">data</strong>属性的标签。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名 = 值]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data = dream] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream">获取到</p>
+<p data="hh">获取不到</p>
+<p data="bb">获取不到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            通过该属性选择器可以获取<strong class="font-tag">data</strong>属性中指定值为<strong class="font-tag">dream</strong>的标签。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名 ~= 值]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data ~= dream] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream dd bb">获取到</p>
+<p data="hh dd ssss dream">获取到</p>
+<p data="bb">获取不到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            当指定属性中<strong class="font-tag">data</strong>存在多个值时，可匹配含有指定值<strong class="font-tag">dream</strong>的标签。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名 ^= 值]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data ^= dream] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream dd bb">获取到</p>
+<p data="hh dd ssss dream">获取不到</p>
+<p data="bb">获取不到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            获取指定属性<strong class="font-tag">data</strong>以值为<strong class="font-tag">dream</strong>开头的标签。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名 $= 值]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data $= dream] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream dd bb">获取不到</p>
+<p data="hh dd ssss dream">获取到</p>
+<p data="bb">获取不到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            获取指定属性<strong class="font-tag">data</strong>以值为<strong class="font-tag">dream</strong>结尾的标签。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名 *= 值]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data *= dream] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream dd bb">获取到</p>
+<p data="hh dd ssss dream">获取到</p>
+<p data="bb">获取不到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            只要指定属性<strong class="font-tag">data</strong>中的值，含有值为<strong class="font-tag">dream</strong>的标签都能被获取。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">标签[属性名 |= 值]</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p[data |= dream] {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p data="dream">获取到</p>
+<p data="hh dd ssss dream">获取不到</p>
+<p data="dreamhh dd ssss dream">获取不到</p>
+<p data="dream-bb">获取到</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            在指定属性<strong class="font-tag">data</strong>中，以值为<strong class="font-tag">dream</strong>或以它开头加中横杠<strong class="font-tag">dream-bb</strong>的标签都能被获取。
+                                    </dd>
+                            </dl>
+
+       
+                        </div><!--  内容结束  -->
+	</div>
+</div>
+
+
+
+</body>
+</html>

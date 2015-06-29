@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>Seajs构建工具</title>
+<meta charset="gb2312" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="format-detection" content="telephone=yes"/>
+<link type="text/css" rel="stylesheet" href="../../resource/css/global.css" />
+<link type="text/css" rel="stylesheet" href="../../resource/css/shCoreDefault.css"/>
+<link type="text/css" rel="stylesheet" href="../../resource/css/layout.css" />
+<script src="../../resource/js/jquery.js"></script>
+<script src="../../resource/js/layout.js"></script>
+<script src="../../resource/js/shCore.js"></script>
+<script src="../../resource/js/shBrushJScript.js"></script>
+<script src="../../resource/js/shBrushCss.js"></script>
+<script src="../../resource/js/shBrushXml.js"></script>
+</head>
+<body>
+
+<div id="Wrap" class="wrap">
+	<h1 id="WTitle" class="w-title">Seajs构建工具</h1>
+	<div id="WBody" class="w-body">
+		<div class="w-cont"><!--  内容开始  -->
+        
+        	<dl>
+            	<dt><strong class="font-big">使用条件</strong></dt>
+                <dd>
+                    <p>a. exports === module.exports</p>
+                    <p>b. exports 是 module.exports 的引用</p>
+                    <p>c. exports 只能扩展属性，不能直接赋值</p>
+                </dd>
+                <dd>
+<pre class="brush: javascript">
+/**错误写法
+*  该对象由于是引用关系，不能直接进行赋值
+**/
+exports = {a:a}
+
+/**正确写法**/
+module.exports = {a:a}
+
+/**解析
+*
+*  由于exports 与 module.exports 是引用关系
+*  exports.a = a 相当于在被引用的对象上添加属性再赋值
+*  exports = {a:a} 相当于 var exports = new Object() 再添加属性和值的的简写，这是一个新对象，引用的是新地址，与module引用地址不同
+*  
+**/
+</pre>
+                </dd>
+            </dl>    
+
+       
+        </div><!--  内容结束  -->
+	</div>
+</div>
+
+
+
+</body>
+</html>

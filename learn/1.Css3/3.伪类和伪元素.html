@@ -1,0 +1,198 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>伪类和伪元素</title>
+<meta charset="gb2312" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="format-detection" content="telephone=yes"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/global.css" />
+<link type="text/css" rel="stylesheet" href="../resource/css/shCoreDefault.css"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/layout.css" />
+<script src="../resource/js/jquery.js"></script>
+<script src="../resource/js/layout.js"></script>
+<script src="../resource/js/shCore.js"></script>
+<script src="../resource/js/shBrushJScript.js"></script>
+<script src="../resource/js/shBrushCss.js"></script>
+<script src="../resource/js/shBrushXml.js"></script>
+</head>
+<body>
+
+
+<div id="Wrap" class="wrap">
+	<h1 id="WTitle" class="w-title">伪类和伪元素</h1>
+	<div id="WBody" class="w-body">
+		<div class="w-cont"><!--  内容开始  -->
+
+							<dl>
+                                    <dt><strong class="font-big">浏览器支持</strong></dt>
+                                    <dd>
+                                            Internet Explorer 9+、Firefox、Chrome、Safari 以及 Opera 支持。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【伪类】:target</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+:target {color:red;}
+</pre>
+<pre class="brush: html;" >
+<a href="#abc">点击</a>
+<p id="abc">获取到</p>
+<p id="bbb">.....</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            该伪类表示，通过a元素哈希链接指向的元素就是被该伪类匹配的元素。
+                                    </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【表单伪类】:enabled</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+input:enabled {color:red;}
+</pre>
+<pre class="brush: html;" >
+<input type="text" value="test" />
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>表示匹配活动元素。</p>
+                                    </dd>
+                                    
+                                    <dt><strong class="font-big">【表单伪类】:disabled</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+input:disabled {color:red;}
+</pre>
+<pre class="brush: html;" >
+<input type="text" value="test" disabled />
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>表示匹配被禁用的元素。</p>
+                                    </dd>
+                                    
+                                    <dt><strong class="font-big">【表单伪类】:checked</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+input:checked {width:100px;height:100px;}
+</pre>
+<pre class="brush: html;" >
+<input type="checkbox" checked />
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>表示匹配被选中的元素。</p>
+                                    </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【文本伪类】:first-line</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+:first-line {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p>测试文本<br/>测试文本</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>该伪类表示首行文本。</p>
+                                    </dd>
+                                    
+                                    <dt><strong class="font-big">【文本伪类】:first-letter</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+:first-letter {color:red;}
+</pre>
+<pre class="brush: html;" >
+<p>测试文本<br/>测试文本</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>该伪类表示文本首字母，使用该伪类后，该文字无法被选中。</p>
+                                    </dd>
+                                    
+                                    <dt><strong class="font-big">【文本伪类】::selection</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+:selection {background:red;}
+</pre>
+<pre class="brush: html;" >
+<p>测试文本<br/>测试文本</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>该伪类表示被鼠标选中的文本。</p>
+                                    </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【伪元素】::before / :before</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p:before {content:'123';color:red;}
+</pre>
+<pre class="brush: html;" >
+<p>.....</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>该伪元素通过其属性<strong class="font-tag">content</strong>添加元素到目标元素内部的最前端。</p>
+                                    </dd>
+                                    
+                                    <dt><strong class="font-big">【伪元素】::after / :after</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p:after {content:'123';color:red;}
+</pre>
+<pre class="brush: html;" >
+<p>.....</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>该伪元素通过其属性<strong class="font-tag">content</strong>添加元素到目标元素内部的最末尾。</p>
+                                    </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            		<dt><strong class="font-big">【伪类】:not(标签/class/id)</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p:not(#d) {color:red;}
+p:not(.c) {color:blue;}
+p:not(p) {color:black;}
+</pre>
+<pre class="brush: html;" >
+<p class="c">.....</p>
+<p id="d">.....</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>该伪元素匹配不符合括号中表达式的元素。</p>
+                                    </dd>                                
+                            </dl>
+                            
+                            
+
+       
+        </div><!--  内容结束  -->
+	</div>
+</div>
+
+
+
+</body>
+</html>

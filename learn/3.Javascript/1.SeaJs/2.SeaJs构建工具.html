@@ -1,0 +1,187 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>Seajs构建工具</title>
+<meta charset="gb2312" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="format-detection" content="telephone=yes"/>
+<link type="text/css" rel="stylesheet" href="../../resource/css/global.css" />
+<link type="text/css" rel="stylesheet" href="../../resource/css/shCoreDefault.css"/>
+<link type="text/css" rel="stylesheet" href="../../resource/css/layout.css" />
+<script src="../../resource/js/jquery.js"></script>
+<script src="../../resource/js/layout.js"></script>
+<script src="../../resource/js/shCore.js"></script>
+<script src="../../resource/js/shBrushJScript.js"></script>
+<script src="../../resource/js/shBrushCss.js"></script>
+<script src="../../resource/js/shBrushXml.js"></script>
+</head>
+<body>
+
+<div id="Wrap" class="wrap">
+	<h1 id="WTitle" class="w-title">Seajs构建工具</h1>
+	<div id="WBody" class="w-body">
+		<div class="w-cont"><!--  内容开始  -->
+        
+        	<dl>
+            	<dt><strong class="font-big">使用条件</strong></dt>
+                <dd>
+                    <p>a. 基于Node.js，需要安装Node.js环境。</p>
+                    <p>b. 需要安装Npm包管理工具。</p>
+                    <p>c. 需要安装的构建工具为：Grunt</p>
+                </dd>
+            </dl>
+            
+            <hr/><!--  段落分割用hr  -->
+
+			<dl>
+            	<dt><strong class="font-big">Grunt安装</strong></dt>               
+                <dd>
+<pre class="brush: javascript">
+/**命令行中依次输入**/
+npm install -g grunt -cli
+npm install grunt --save-dev
+
+/**查看是否安装及版本**/
+grunt -version
+/**显示如下表示安装成功
+*
+*  grunt-cli vXXXX
+*  grunt vXXXX
+*
+**/
+</pre>
+                </dd>
+            </dl>
+            
+            <hr/><!--  段落分割用hr  -->
+            
+            <dl>
+            	<dt><strong class="font-big">Grunt基本使用--插件</strong></dt>
+                <dd>进入官方网址：<strong class="font-tag">http://gruntjs.com/plugins</strong>，搜索需要的插件，说明上带有<strong class="font-tag">by Grunt Team</strong>则为官方提供的插件。</dd>
+
+                <dt><strong class="font-big">合并插件--contrib-concat / 压缩插件--contrib-uglify</strong></dt>
+                <dd>
+<pre class="brush: javascript">
+/**package.json配置
+*
+*  在需要进行项目构建的目录下新建package.json文件    
+*  配置后，运行命令：npm install
+*  它会自动将未安装的工具插件安装到该目录底下
+*  配置内容如下：
+*
+**/
+
+{
+    "name" : "project-name",    //填写项目名，根据自己需要填写
+    "version" : "project-version",  //填写项目版本号
+    "derDependencies" : {   //配置需要引入的插件
+        "grunt" : "~0.0.0.0",   //该插件的版本号
+        "grunt-contrib-concat" : "~0.0.0.0", //该插件的版本号
+        "grunt-contrib-uglify" : "~0.0.0.0"
+    }
+}
+</pre>                    
+                </dd>
+
+                <dt><strong class="font-big">合并/压缩 操作--Gruntfile.js--使用关键</strong></dt>
+                <dd>
+<pre class="brush: javascript">
+/**Gruntfile.js配置
+*
+*  在新建package.json文件的目录下新建该文件    
+*  配置后，在命令行中进入目标目录，运行命令：grunt
+*  配置内容如下：
+*
+**/
+
+module.exports = function (grunt){
+    grunt.initConfig({
+        pkg : grunt.file.readJSON('package.json'),  //获取相关配置文件
+        concat : {  //配置合并任务
+            project-name : {    //任务名根据需要自己命名
+                files : {   //合并后生成的路径 ：需要合并的目标文件路径
+                    'dist/main.js' : ['js/a.js', 'js/b.js']
+                }
+            }
+        },
+        uglify : {
+            project-name : {
+                files : {
+                    'dist/main.min.js' : ['dist/main.js'] 
+                }
+            }
+        }
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-concat'); //加载需要运行的插件，一个插件写一句
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.registerTask('default', ['conccat', 'uglify']); //运行插件，多个插件使用数组形式添加
+}
+</pre>
+                </dd>
+            </dl>
+
+            <hr/><!--  段落分割用hr  -->
+
+            <dl>
+                <dt><strong class="font-big">SeaJs构建问题</strong></dt>
+                <dd>
+                    <p>a. 合并前需要提取模块ID</p>
+                    <p>b. define需要多添加两个参数：~当前模块ID，~依赖模块数组：如下</p>
+                </dd>
+                <dd>
+<pre class="brush: javascript">
+define('/js/a.js', [], function (...){  //依次为：模块ID，依赖数组，回调函数
+    ...
+})
+</pre>
+                </dd>
+
+                <dt><strong class="font-big">ID提取插件--cmd-transport</strong></dt>
+                <dd>
+<pre class="brush: javascript">
+/**package.json配置**/
+
+{
+    "name" : "project-name",
+    "version" : "project-version",
+    "derDependencies" : {
+        "grunt" : "~0.0.0.0",
+        "grunt-cmd-transport" : "~0.0.0.0"
+    }
+}
+
+/**Gruntfile.js配置**/
+
+module.exports = function (grunt){
+    grunt.initConfig({
+        pkg : grunt.file.readJSON('package.json'),
+        transport : {
+            project-name : {
+                files : {
+                    '.build' : ['js/a.js', 'js/b.js'] 
+                }
+            }
+        }
+    });
+
+    grunt.loadNpmTasks('grunt-cmd-transport');
+    grunt.registerTask('default', ['transport']);
+}
+</pre>                     
+                </dd>
+                <dd>
+                    <p>其他插件：cmd规范合并插件~cmd-concat，清楚文件插件~contrib-clean。</p>
+                    <p>SeaJs使用的是CMD规范，建议使用插件时最好使用CMD相关的插件。</p>
+                </dd>
+            </dl>      
+
+       
+        </div><!--  内容结束  -->
+	</div>
+</div>
+
+
+
+</body>
+</html>

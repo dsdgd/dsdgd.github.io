@@ -1,0 +1,228 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>CSS3结构性伪类</title>
+<meta charset="gb2312" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="format-detection" content="telephone=yes"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/global.css" />
+<link type="text/css" rel="stylesheet" href="../resource/css/shCoreDefault.css"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/layout.css" />
+<script src="../resource/js/jquery.js"></script>
+<script src="../resource/js/layout.js"></script>
+<script src="../resource/js/shCore.js"></script>
+<script src="../resource/js/shBrushJScript.js"></script>
+<script src="../resource/js/shBrushCss.js"></script>
+<script src="../resource/js/shBrushXml.js"></script>
+</head>
+<body>
+
+
+
+<div id="Wrap" class="wrap">
+	<h1 id="WTitle" class="w-title">CSS3结构性伪类</h1>
+	<div id="WBody" class="w-body">
+		<div class="w-cont"><!--  内容开始  -->
+
+                            <dl>
+                                    <dt><strong class="font-big">浏览器支持</strong></dt>
+                                    <dd>
+                                            Internet Explorer 9+、Firefox 3.5+、Chrome 1.0.x+、Safari 3.1+ 以及 Opera 9.6+ 支持。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">:nth-child(n)</strong></dt>
+                                    <dd>
+<pre class="brush: css">
+div *:nth-child(2) {font-size:40px;}
+p:nth-child(1) {background:black;}
+p:nth-child(odd) {background:yellow;}
+p:nth-child(even) {background:blue;}
+</pre>
+<pre class="brush: html">
+<div>
+    <p>1</p><!--生效，背景黑色-->
+    <div>2</div><!--生效，40号字体，背景蓝色-->
+    <p>3</p><!--生效，奇数位背景黄色-->
+    <p>4</p><!--生效，偶数位背景蓝色-->
+    <p>5</p><!--生效，奇数位背景黄色-->
+</div>
+</pre>                                           
+                                    </dd>
+                                    <dd>
+                                    	<p>:nth-child(n) → <strong class="font-tag">n</strong>数值从1开始，<strong class="font-tag">odd</strong>代表奇数行，<strong class="font-tag">even</strong>代表偶数行。详解：该标签（p）的父级下的第n个标签，若第n个标签不是与该标签（p）同一类型，则样式不生效。</p>
+                                        <p>如果就是想找到父级下的第n个元素（不管是不是同一标签）→ <strong class="font-tag">父级标签 *:nth-child(n) {...}</strong>。</p>
+                                    </dd>
+                                    <dd>
+                                    	<p>:nth-child(n)中可进行加减运算：基础变量<strong class="font-tag">n（0 ~ 正无穷）</strong> → n代表从第0个元素开始，但第0个或为负的元素是不存在的，实际是从第1个元素开始，例如如下：</p>
+<pre class="brush: css">
+p:nth-child(3n+2) {color:red;}
+</pre>
+<pre class="brush: html">
+<div>
+    <p>1</p>
+    <p>2</p><!--生效，(3*0+2=2)背景红色-->
+    <p>3</p>
+    <p>4</p>
+    <p>5</p><!--生效，(3*1+2=5)背景红色-->
+</div>
+</pre>                                        
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:nth-last-child(n)</strong></dt>
+                                <dd>功能与:nth-child(n)基本几乎一样，:nth-child(n)有的特性，它也一样具有，区别在于它是从末尾往前数。</dd>
+                                <dd>
+<pre class="brush: css">
+p:nth-last-child(1) {color:red;}
+</pre>
+<pre class="brush: html">
+<div>
+    <p>1</p>
+    <p>2</p><!--生效，背景红色-->
+</div>                                
+                                </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:nth-of-type(n)</strong></dt>
+                                <dd>
+<pre class="brush: css">
+p:nth-of-type(1) {color:red;}
+</pre>
+<pre class="brush: html">
+<div>
+	<div>1</div>
+    <p>2</p><!--生效，背景红色-->
+    <p>3</p>
+</div>                                
+                                </dd>
+                                <dd>
+                                	<p><strong class="font-tag">:nth-of-type(n)</strong> → 从该标签的父级下查找第n个该标签。</p>
+                                    <p><strong class="font-tag">父级标签 *:nth-of-type(n) {...}</strong> → 从所有标签的父级下查找所有类型标签的第n个标签</p>
+                                </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:nth-last-of-type(n)</strong></dt>
+                            	<dd>作用与nth-of-child(n)一样，区别只是它从后往前找元素</dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:first-child</strong></dt>
+                                <dd>等同于 :nth-child(1)，注：<strong class="font-tag">IE7+以上的浏览器均支持</strong></dd>
+
+                            	<dt><strong class="font-big">:last-child</strong></dt>
+                                <dd>等同于 :nth-last-child(1)</dd>
+
+                            	<dt><strong class="font-big">:first-of-type</strong></dt>
+                                <dd>等同于 :nth-of-type(1)</dd>
+
+                            	<dt><strong class="font-big">:last-of-type</strong></dt>
+                                <dd>等同于 :nth-last-of-type(1)</dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:empty</strong></dt>
+                                <dd>从该标签父级下找该标签的空标签，即该标签中不含任何标签和文本、空格、换行</dd>
+                                <dd>
+<pre class="brush: css">
+p:empty {height:20px;background:red;}
+</pre>
+<pre class="brush: html">
+<div>
+    <p></p><!--这里会生效-->
+    <div>2</div>
+    <p>
+    </p>
+    <div>   </div>
+    <p></p><!--这里会生效-->
+    <h1>6</h1>
+</div>
+</pre>                                
+                                </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:only-child</strong></dt>
+                                <dd>该标签父级下只有一个子节点（不包含文本节点）</dd>
+                                <dd>
+<pre class="brush: css">
+h6:only-child {background:red;}
+</pre>
+<pre class="brush: html">
+<div><!--都不生效-->
+    <h6>1</h6>
+    <stong>2</stong>
+</div>
+</pre>                                
+                                </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            	<dt><strong class="font-big">:only-of-type</strong></dt>
+                                <dd>该标签父级下只有一个与该标签同一类型的子节点</dd>
+                                <dd>
+<pre class="brush: css">
+h6:only-of-type {background:yellow;}
+</pre>
+<pre class="brush: html">
+<div>
+    <h6>1</h6><!--生效-->
+    <stong>2</stong>
+</div>
+</pre>                                
+                                </dd>
+                            </dl>
+                            
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                            		<dt><strong class="font-big">标签 ~ 标签</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p~span {color:red;}
+</pre>
+<pre class="brush: html;" >
+<span>1</span>
+<p>
+	<span>1</span>
+</p>
+<span>红色</span>
+<span>红色</span>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            <p>匹配目标元素之后的所有元素。</p>
+                                    </dd>                                
+                            </dl>
+
+
+
+       
+                        </div><!--  内容结束  -->
+	</div>
+</div>
+
+
+
+</body>
+</html>

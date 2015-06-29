@@ -1,0 +1,192 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>文本属性</title>
+<meta charset="gb2312" />
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="format-detection" content="telephone=yes"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/global.css" />
+<link type="text/css" rel="stylesheet" href="../resource/css/shCoreDefault.css"/>
+<link type="text/css" rel="stylesheet" href="../resource/css/layout.css" />
+<script src="../resource/js/jquery.js"></script>
+<script src="../resource/js/layout.js"></script>
+<script src="../resource/js/shCore.js"></script>
+<script src="../resource/js/shBrushJScript.js"></script>
+<script src="../resource/js/shBrushCss.js"></script>
+<script src="../resource/js/shBrushXml.js"></script>
+</head>
+<body>
+
+
+<div id="Wrap" class="wrap">
+	<h1 id="WTitle" class="w-title">文本属性</h1>
+	<div id="WBody" class="w-body">
+		<div class="w-cont"><!--  内容开始  -->
+
+							<dl>
+                                    <dt><strong class="font-big">浏览器支持</strong></dt>
+                                    <dd>
+                                            Internet Explorer 9+、Firefox、Chrome、Safari 以及 Opera 支持。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【颜色模式】RGBA(红,绿,蓝,透明度)</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p {padding:10px;background:rgba(255,255,255,0.5);}
+</pre>
+<pre class="brush: html;" >
+<p>.....</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                            该颜色模式的透明度范围(0~1)。PS：元素边框使用rgba设置透明度后，边框会将元素的背景透露出来。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【文字阴影】text-shadow</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p {text-shadow: 5px 5px 10px #000;}
+div {text-shadow: 5px 5px 10px #f00;}
+</pre>
+<pre class="brush: html;" >
+<p>测试范例1</p>
+<div>测试范例2</div>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                    	text-shadow(x轴偏移量 y轴偏移量 模糊程度 颜色 , ....)，多个阴影通过逗号分隔开。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【文字描边-webkit特有】text-stroke</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p {-webkit-text-stroke: 5px #000;}
+</pre>
+<pre class="brush: html;" >
+<p>测试范例1</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                    	text-stroke(宽度 颜色)。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+							<dl>
+                                    <dt><strong class="font-big">以下属性的浏览器支持</strong></dt>
+                                    <dd>
+                                            Internet Explorer 6+、Firefox、Chrome、Safari 以及 Opera 支持。
+                                    </dd>
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->                            
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【文字排版】direction</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p {width:200px; border:1px solid #000; direction: ltr;}
+div {width:200px; border:1px solid #000; direction: rtl;}
+</pre>
+<pre class="brush: html;" >
+<p>测试范例1</p>
+<div>测试范例2</div>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                    	<p>direction的属性<strong class="font-tag">ltr</strong>表示左靠拢，<strong class="font-tag">rtl</strong>表示右靠拢。</p>
+                                    </dd>
+
+                                    <dt><strong class="font-big">【文字书写方向】unicode-bidi</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p {unicode-bidi:bidi-override}
+</pre>
+<pre class="brush: html;" >
+<p>测试范例1</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                    	<p><strong class="font-tag">bidi-override</strong>表示方向书写。</p>
+                                    </dd>
+                                    
+                                    <dt><strong class="font-big">【文字超出显示省略号】text-overflow</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+p {width:20px;
+	overflow:hidden;
+	white-space:nowrap;
+    text-overflow:ellipsis;
+}
+</pre>
+<pre class="brush: html;" >
+<p>测试范例1</p>
+</pre>                                  
+                                    </dd>
+                                    <dd>
+                                    	<strong class="font-tag">ellipsis</strong>表示省略号，<strong class="font-tag">clip</strong>表示无省略号。
+                                    </dd>
+
+                            </dl>
+
+                            <hr/><!--  段落分割用hr  -->
+                            
+                            <dl>
+                                    <dt><strong class="font-big">【自定义字体】@font-face</strong></dt>
+                                    <dd>
+<pre class="brush: css;" >
+@font-face {
+    font-family: 'myfont';
+    src: url('_-webfont.eot');
+    src: url('_-webfont.eot?#iefix') format('embedded-opentype'),
+         url('_-webfont.woff2') format('woff2'),
+         url('_-webfont.woff') format('woff'),
+         url('_-webfont.ttf') format('truetype'),
+         url('_-webfont.svg#fzbaosong-z04sregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+p {font-family:'myfont';}
+</pre>
+                                    </dd>
+                                    <dd>
+                                    	<p><strong class="font-tag">font-family</strong>：设置文本的字体名称。</p>
+                                        <p><strong class="font-tag">font-style</strong>：设置文本样式。</p>
+                                        <p><strong class="font-tag">font-variant</strong>：设置文本是否大小写。</p>
+                                        <p><strong class="font-tag">font-weight</strong>：设置文本的粗细。</p>
+                                        <p><strong class="font-tag">font-stretch</strong>：设置文本是否横向的拉伸变形。</p>
+                                        <p><strong class="font-tag">font-size</strong>：设置文本字体大小。</p>
+                                        <p><strong class="font-tag">src</strong>：设置自定义字体的相对路径或者绝对路径。</p>
+                                    </dd>
+                                    <dd>
+                                    	<p>自定义字体制作过程：</p>
+                                        <p>1.使用Adobe AI绘制自定义字体或图标</p>
+                                        <p>2.AsiaFont Studio新建个页面，选择Uincode字体</p>
+                                        <p>3.在AsiaFont Studio中随便选个字体，然后把AI的矢量图形粘贴到此，然后导出</p>
+                                        <p>4.将导出的字体上传到<strong class="font-tag">www.fontsquirrel.com/tools/webfont-generator</strong>生成兼容性字体就可以使用了。</p>
+                                    </dd>
+                            </dl>
+
+
+       
+        </div><!--  内容结束  -->
+	</div>
+</div>
+
+
+
+</body>
+</html>
