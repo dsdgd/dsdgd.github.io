@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网站选型表</title>
+<link rel="stylesheet" href="resource/css/golbal.css" />
+<link rel="stylesheet" href="resource/css/webfilter.css" />
+<link rel="stylesheet" href="resource/css/other.css" /><style>body{padding: 100px 0 0 200px;}</style>
+<script src="resource/js/jquery.js"></script>
+<script src="resource/js/jquery-ui.js"></script>
+<script src="resource/js/sea.js"></script>
+</head>
+<body style="height:2000px;width:3000px;">
+
+<!--筛选区-->
+<div class="zlg-screening">
+	
+    <div id="ZlgScreenTop" class="zlg-screen-top clearFix">
+    	<span class="fl">产品筛选</span>
+        <input id="ZlgReset" class="fr" type="button" value="重置"/>
+    </div>
+    
+    <div id="ZlgScreenMain" class="zlg-screen-main"></div>
+    
+    <div id="ZlgToggle" class="zlg-toggle" data-toggle="show">显示全部选项</div>
+    
+</div>
+
+<!--数据区-->
+<div id="ZlgResult" class="zlg-result">
+
+</div>
+
+<!--分页-->
+<div class="zlg-page">
+	
+	<span id="ZlgPageInfo" class="zlg-page-info">
+		<span>当前第</span>
+		<strong>0</strong>
+		<span>页/共</span>
+		<strong>0</strong>
+		<span>页</span>
+	</span>
+
+	<span id="ZlgPageList" class="zlg-page-list"></span>
+</div>
+
+
+
+<script>
+/*
+seajs.use('WebFilter/jQuery.webFilter.js', function (e){
+	e.init({
+		'url'		: 	'HTTP_GET_TOP.php',
+		'nodeid'	: 	409,
+		'tName'		: 	'MCU',
+		'pagesize'	: 	50,
+		'page'		: 	1,
+		'filter'	: 	'v_kernel=$M4$',
+		'key'		: 	'Flash,RAM,Frequency,UART,I2C,SPI,ADC_ChnlCnt,GPIO,Package,PWM,Timer',
+		'title'		: 	'Flash(KB),RAM(KB),主频,UART,I2C,SPI,ADC_ChnlCnt,GPIO,封装,PWM,Timer',
+		'tabKey'	: 	'PartNo,Frequency,Flash,RAM,UART,I2C,SPI,ADC_ChnlCnt,GPIO,Package,PWM,Timer',
+		'tabTitle'	: 	'PartNo,主频,Flash(KB),RAM(KB),UART,I2C,SPI,ADC_ChnlCnt,GPIO,封装,PWM,Timer',
+		'ifShow'	: 	''		
+	});
+});
+*/
+/*
+seajs.use('WebFilter/jQuery.webFilter.js', function (e){
+	e.init({
+		'url'		: 	'HTTP_GET_TOP.php',
+		'nodeid'	: 	409,
+		'tName'		: 	'MCU',
+		'pagesize'	: 	20,
+		'page'		: 	1,
+		'filter'	: 	'v_kernel=$M3$',
+		'title'		: 	'Flash:Flash(KB),RAM:RAM(KB),Frequency:主频,UART:UART,I2C:I2C,SPI:SPI,ADC_ChnlCnt:ADC_ChnlCnt,GPIO:GPIO,Package:封装,PWM:PWM,Timer:Timer',
+		'tabTitle'	: 	'PartNo:型号,Flash:Flash(KB),RAM:RAM(KB),Frequency:主频,UART:UART,I2C:I2C,SPI:SPI,ADC_ChnlCnt:ADC_ChnlCnt,GPIO:GPIO,Package:封装,PWM:PWM,Timer:Timer',
+		'ifShow'	: 	''		
+	});
+});
+*/
+seajs.use('WebFilter/jQuery.webFilter.js', function (e){
+	e.init({
+		'url'		: 	'HTTP_GET_TOP.php',
+		'nodeid'	: 	2112 ,
+		'tName'		: 	'MCU',
+		'pagesize'	: 	20,
+		'page'		: 	1,
+		'filter'	: 	'v_kernel=$M0$',
+		'title'	 	:	 'brand:品牌,PartSeries:芯片系列,Frequency:主频（MHz）,Flash:Flash,RAM:RAM(KB),EEPROM:EEPROM,TFT:TFT,Ethernet:Ethernet,USB:USB(总数),CAN:CAN,UART:UART,I2S:I2S,I2C:I2C,SPI:SPI,TSI:TSI,PWM:PWM',
+		'tabTitle' 	: 	'brand:品牌,PartSeries:芯片系列,Frequency:主频（MHz）,Flash:Flash,RAM:RAM(KB),EEPROM:EEPROM,TFT:TFT,Ethernet:Ethernet,USB:USB(总数),CAN:CAN,UART:UART,I2S:I2S,I2C:I2C,SPI:SPI,TSI:TSI,PWM:PWM,ADC_Cnt:ADC_Cnt,ADC_ChnlCnt:ADC路数,DAC_Cnt:DAC_Cnt,DAC_ChnlCnt:DAC路数,DAC_BitCnt:DAC_BitCnt,ACMP:ACMP,GPIO:GPIO,TempRange:温度范围,Package:封装,Timer:Timer,QEI:QEI,LEUART:LEUART,USB_Host:USB_Host,ADC_BitCnt:ADC_BitCnt,USB_device:USB_device,USB_OTG:USB_OTG,RTC:RTC,OPAMP:OPAMP,EMC:EMC,LCD_com:LCD_com,LCD_seg:LCD_seg',
+		'ifShow'	: 	''		
+	});
+});
+</script>
+</body>
+</html>

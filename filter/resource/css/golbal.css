@@ -1,0 +1,37 @@
+/*********************************
+*
+*			CSS Init
+*
+* 该文件为公共样式，公共CSS都需添加在此
+*
+**********************************/
+html,body{height:100%}
+body,ul,ol,li,dl,dd,p,h1,h2,h3,h4,h5,h6,form,button,input,textarea,th,td,select,pre{margin:0}
+body{background:#fff;font:12px/1.5 'Microsoft Yahei',tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+table{border-collapse:collapse;border-spacing:0}
+body,th,td,textarea,option,ul,ol,dd{padding:0}
+input,select,textarea{font:12px/1.5 'Microsoft Yahei',tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;outline:none}
+textarea{resize:none}
+ul,ol,li{list-style:none}
+a{color:#333;text-decoration:none}
+img,input{border:0}
+.clearFix:after{content:".";clear:both;display:block;height:0;visibility:hidden}
+.clearFix{*zoom:1}
+.clear{clear:both}
+.fl{float:left}
+.fr{float:right}
+
+
+
+
+/*********************************
+*
+*			global
+*
+**********************************/
+.w-full { width: 100%; }
+.w-fixed { width: 980px; }
+.h-full { height: 100%; }
+.m-center { margin: 0 auto; }
+.p-absolute { position: absolute; z-index: 3; }

@@ -1,0 +1,85 @@
++--------------------------------------------------------+
++                     文件目录结构                       +
++--------------------------------------------------------+
+
+./index.html              /** 程序首页，程序执行入口 **/
+
+./HTTP_GET_BOTTOM.php     /** 仿GET提交，URL提交中转站(暂不使用) **/
+
+./HTTP_GET_TOP.php        /** 仿GET提交，URL提交中转站 **/
+
+./resource/               /** 引用资源 **/
+
+./resource/css            /** css样式 **/
+
+./resource/images         /** 图片资源 **/
+
+./resource/js             /** js资源 **/
+
+
+
++--------------------------------------------------------+
++                       js目录结构                       +
++--------------------------------------------------------+
+
+./resource/js
+
+./resource/js/Gruntfile.js       /** GruntJs插件配置文件 **/
+
+./resource/js/jquery.js          /** jq库 **/
+
+./resource/js/jquery.lazyload.js /** jq图片延迟加载库 **/
+
+./resource/js/jquery-ui.js       /** jqUi库 **/
+
+./resource/js/sea.js             /** seaJs库 **/
+
+./resource/js/package.json       /** NodeJs npm配置文件 **/
+
+./resource/js/.build/            /** 经CMD相关插件提取ID后的js文件 **/
+
+./resource/js/dist/              /** js的合并与压缩资源 **/
+
+./resource/js/node_modules/      /** NodeJS相关插件资源 **/
+
+./resource/js/WebFilter/         /** js程序源文件 **/
+
+
+
++--------------------------------------------------------+
++                   js源文件目录结构                     +
++--------------------------------------------------------+
+
+./resource/js/WebFilter/
+
+./resource/js/WebFilter/jQuery.webFilter.js           /** 构造程序，负责程序首次ajax **/
+
+./resource/js/WebFilter/data-processing.js            /** 数据解析 **/
+
+./resource/js/WebFilter/ui-screening.js               /** UI生成构造程序，负责与筛选UI相关生成 **/
+
+./resource/js/WebFilter/ui-slider.js                  /** 拖拽滚动UI，添加事件 **/
+
+./resource/js/WebFilter/ui-checkbox.js                /** 单选按钮UI，添加事件 **/
+
+./resource/js/WebFilter/ui-moreKey.js                 /** 复选按钮UI，添加事件与UI **/
+
+./resource/js/WebFilter/ui-toggle.js                  /** 收缩栏UI，添加事件与UI **/
+
+./resource/js/WebFilter/data-getKeyWord.js            /** 返回URL，触发交互时获取相关字段并生成URL **/
+
+./resource/js/WebFilter/data-ajax.js                  /** ajax与分页 **/
+
+./resource/js/WebFilter/ui-fixHead.js                 /** 表格头部固定 **/
+
+./resource/js/WebFilter/ui-hoverBgColor.js            /** 表格隔行变色 **/
+
+./resource/js/WebFilter/ui-reset.js                   /** 程序重置 **/
+
+
+
+
+
+
+
+
