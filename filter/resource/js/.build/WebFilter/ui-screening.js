@@ -32,7 +32,7 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
             //----添加标题、属性
             sHtml2.attr("title", aAlias[i]);
             sHtml2.attr("data-name", aTitle[i]);
-            sHtml2.html(aAlias[i]);
+            sHtml2.html('<span class="zlg-screen-cont-title">' + aAlias[i] + '</span><span class="zlg-reset-one"></span>');
             var oRows = aData[i][aTitle[i]];
             //json→{str:[], num:[]}
             if (oRows["num"].length >= 8) {

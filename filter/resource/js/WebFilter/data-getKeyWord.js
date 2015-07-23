@@ -163,6 +163,7 @@ define({
         //sUrl = sUrl.substring(0, sUrl.length - 5);
         //删除最后一个AND字符
         sUrl = config['url']+'?nodeid='+config['nodeid']+'&tName='+config['tName']+'&pagesize='+config['pagesize']+'&page='+config['page']+'&filter='+sUrl+config['filter'];
+       
         sUrl = encodeURI(sUrl);
         
         return sUrl;

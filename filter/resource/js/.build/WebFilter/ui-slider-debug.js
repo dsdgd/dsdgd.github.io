@@ -55,7 +55,6 @@ define("WebFilter/ui-slider-debug", [ "./data-getKeyWord-debug", "./data-ajax-de
             change: function(event, ui) {
                 //拖拽后鼠标抬起,在此添加ajax查询事件
                 var sUrl = require("./data-getKeyWord-debug").init(Json, config);
-                sUrl = encodeURI(sUrl);
                 require("./data-ajax-debug").init(sUrl, config);
             }
         });

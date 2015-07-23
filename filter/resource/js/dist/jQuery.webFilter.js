@@ -67,7 +67,8 @@ config = {
                     sUrl = encodeURI(sUrl);
                     require("./data-ajax").init(sUrl, config);
                     //重置UI
-                    require("./ui-reset").init("#ZlgReset", sUrl, config);
+                    require("./ui-reset").init("#ZlgReset", config, oJson, sUrl);
+                    require("./ui-reset").init(".zlg-reset-one", config, oJson);
                 }
             });
         });
@@ -267,7 +268,7 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
             //----添加标题、属性
             sHtml2.attr("title", aAlias[i]);
             sHtml2.attr("data-name", aTitle[i]);
-            sHtml2.html(aAlias[i]);
+            sHtml2.html('<span class="zlg-screen-cont-title">' + aAlias[i] + '</span><span class="zlg-reset-one"></span>');
             var oRows = aData[i][aTitle[i]];
             //json→{str:[], num:[]}
             if (oRows["num"].length >= 8) {
@@ -403,7 +404,6 @@ define("WebFilter/ui-slider", [ "./data-getKeyWord", "./data-ajax", "./data-proc
             change: function(event, ui) {
                 //拖拽后鼠标抬起,在此添加ajax查询事件
                 var sUrl = require("./data-getKeyWord").init(Json, config);
-                sUrl = encodeURI(sUrl);
                 require("./data-ajax").init(sUrl, config);
             }
         });
@@ -534,47 +534,92 @@ define("WebFilter/ui-toggle", [], function(require, exports, module) {
 });
 
 //重置所有参数
-define("WebFilter/ui-reset", [ "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, moudle) {
-    function init(obj, url, config) {
-        $(obj).click(function() {
-            $(".zlg-slider").each(function() {
-                //input重置
-                $(this).children(":first").val($(this).children(":first").attr("data-initnum"));
-                $(this).children(":last").val($(this).children(":last").attr("data-initnum"));
-            });
-            $(".zlg-range").each(function() {
-                //拖拽条重置
-                $(this).children(":first").css({
-                    left: "0%",
-                    width: "100%"
+define("WebFilter/ui-reset", [ "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead", "./data-getKeyWord" ], function(require, exports, moudle) {
+    function init(obj, config, Json, url) {
+        if (url) {
+            //全部重置
+            $(obj).click(function() {
+                $(".zlg-slider").each(function() {
+                    //input重置
+                    $(this).children(":first").val($(this).children(":first").attr("data-initnum"));
+                    $(this).children(":last").val($(this).children(":last").attr("data-initnum"));
                 });
-                $(this).children(":eq(1)").css({
-                    left: "0%"
+                $(".zlg-range").each(function() {
+                    //拖拽条重置
+                    $(this).children(":first").css({
+                        left: "0%",
+                        width: "100%"
+                    });
+                    $(this).children(":eq(1)").css({
+                        left: "0%"
+                    });
+                    $(this).children(":last").css({
+                        left: "100%"
+                    });
                 });
-                $(this).children(":last").css({
-                    left: "100%"
+                $(".zlg-btns-data").each(function() {
+                    //单选框重置
+                    $(this).find(":checkbox").prop({
+                        checked: false
+                    });
                 });
-            });
-            $(".zlg-btns-data").each(function() {
-                //单选框重置
-                $(this).find(":checkbox").prop({
-                    checked: false
+                $(".zlg-more-btns").each(function() {
+                    //单选按钮重置
+                    $(this).find(":checkbox").prop({
+                        checked: false
+                    });
                 });
-            });
-            $(".zlg-more-btns").each(function() {
-                //单选按钮重置
-                $(this).find(":checkbox").prop({
-                    checked: false
+                $(".zlg-btns-chosen").each(function() {
+                    //单选框重置
+                    $(this).attr("title", "更多筛选参数");
+                    $(this).children().html("更多筛选参数");
+                    $(this).children().removeClass("chosen-filter-color");
                 });
+                require("./data-ajax").init(url, config);
             });
-            $(".zlg-btns-chosen").each(function() {
-                //单选框重置
-                $(this).attr("title", "更多筛选参数");
-                $(this).children().html("更多筛选参数");
-                $(this).children().removeClass("chosen-filter-color");
+        } else {
+            //单个重置
+            $(obj).click(function() {
+                $(this).parent().next().find(".zlg-slider").each(function() {
+                    //input重置
+                    $(this).children(":first").val($(this).children(":first").attr("data-initnum"));
+                    $(this).children(":last").val($(this).children(":last").attr("data-initnum"));
+                });
+                $(this).parent().next().find(".zlg-range").each(function() {
+                    //拖拽条重置
+                    $(this).children(":first").css({
+                        left: "0%",
+                        width: "100%"
+                    });
+                    $(this).children(":eq(1)").css({
+                        left: "0%"
+                    });
+                    $(this).children(":last").css({
+                        left: "100%"
+                    });
+                });
+                $(this).parent().next().find(".zlg-btns-data").each(function() {
+                    //单选框重置
+                    $(this).find(":checkbox").prop({
+                        checked: false
+                    });
+                });
+                $(this).parent().next().find(".zlg-more-btns").each(function() {
+                    //单选按钮重置
+                    $(this).find(":checkbox").prop({
+                        checked: false
+                    });
+                });
+                $(this).parent().next().find(".zlg-btns-chosen").each(function() {
+                    //单选框重置
+                    $(this).attr("title", "更多筛选参数");
+                    $(this).children().html("更多筛选参数");
+                    $(this).children().removeClass("chosen-filter-color");
+                });
+                url = require("./data-getKeyWord").init(Json, config);
+                require("./data-ajax").init(url, config);
             });
-            require("./data-ajax").init(url, config);
-        });
+        }
     }
     exports.init = init;
 });

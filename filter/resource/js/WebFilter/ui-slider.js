@@ -65,7 +65,6 @@ define(function (require, exports, module){
 			change: function( event, ui ){
 				//拖拽后鼠标抬起,在此添加ajax查询事件
 				var sUrl = require('./data-getKeyWord.js').init(Json, config);
-				sUrl = encodeURI(sUrl);
 				require('./data-ajax.js').init(sUrl, config);
 			}
 		});

@@ -80,11 +80,33 @@
 	background: #f1f1f1;
 	border-right: 1px solid #e4e4e4;
 	line-height: 45px;
+	position: relative;
+}
+
+.zlg-screen-cont-title {
+	display: block;
 	overflow: hidden;
 	padding-left: 8px;
 	text-overflow: ellipsis;
 	width: 101px;
 	white-space: nowrap;
+}
+
+.zlg-reset-one {
+	background: url(http://120.24.86.98:8088/Template/Default/Skin/resources/images/global/reset.png) center center no-repeat;
+	cursor: pointer;
+	height: 18px;
+	margin-top: -9px;
+	position: absolute;
+	right: -9px;
+	top: 50%;
+	width: 18px;
+}
+
+.zlg-reset-one:before {
+	content: '';
+	color: #fff;
+	line-height: 18px;
 }
 
 .zlg-screen-cont dd {
@@ -385,7 +407,7 @@
 	cursor: auto;
 }
 
-
+.custom-c-t-hide {display: none;}
 
 
 

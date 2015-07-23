@@ -37,7 +37,7 @@ define(function(require, exports, module) {
             //----添加标题、属性
             sHtml2.attr("title", aAlias[i]);
             sHtml2.attr("data-name", aTitle[i]);
-            sHtml2.html(aAlias[i]);
+            sHtml2.html('<span class="zlg-screen-cont-title">'+aAlias[i]+'</span><span class="zlg-reset-one"></span>');
 
             var oRows = aData[i][ aTitle[i] ];//json→{str:[], num:[]}
 

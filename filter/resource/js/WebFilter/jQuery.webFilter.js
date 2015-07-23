@@ -81,8 +81,8 @@ config = {
 					require('./data-ajax.js').init(sUrl, config);
 					
 					//重置UI
-					require('./ui-reset.js').init('#ZlgReset', sUrl, config);
-					
+					require('./ui-reset.js').init('#ZlgReset', config, oJson, sUrl);
+					require('./ui-reset.js').init('.zlg-reset-one', config, oJson);
 				}
 			})
 		})//End

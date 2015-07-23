@@ -67,7 +67,8 @@ config = {
                     sUrl = encodeURI(sUrl);
                     require("./data-ajax").init(sUrl, config);
                     //重置UI
-                    require("./ui-reset").init("#ZlgReset", sUrl, config);
+                    require("./ui-reset").init("#ZlgReset", config, oJson, sUrl);
+                    require("./ui-reset").init(".zlg-reset-one", config, oJson);
                 }
             });
         });
