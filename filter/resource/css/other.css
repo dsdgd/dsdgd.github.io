@@ -26,6 +26,27 @@
 	top: 50%;	
 }
 
+.zlg-per {	
+	background: #dddddd;	
+	background-image: -webkit-gradient(linear,0 -10%,0 89%, from(#dddddd), to(#ffffff),color-stop(0,#dddddd),color-stop(100%,#ffffff));
+	background-image: -moz-linear-gradient(center top , #dddddd, #ffffff);
+	background-image: -ms-linear-gradient(top, #dddddd, #ffffff);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#dddddd',endColorStr='#ffffff',gradientType='0');
+	height: 10px;
+	margin: 11px 7px 0 0;
+	overflow: hidden;
+	width: 300px;
+	border-radius: 5px;	
+}
+
+.zlg-per > div {
+	background: #5f83a7;
+	height: 8px;
+	margin: 1px 0;
+	width: 0%;
+	border-radius: 4px;
+}
+
 .zlg-screening {
 	border: 1px solid #e4e4e4;
 	margin-bottom: 50px;
@@ -46,14 +67,12 @@
 }
 
 .zlg-screen-top input {
-	background: #5f83a7;
-	color: #fff;
+	background: url(http://120.24.86.98:8088/Template/Default/Skin/resources/images/global/reset2.png) center center no-repeat;;
 	cursor: pointer;
-	height: 22px;
-	margin: 5px 9px 0 0;
-	width: 44px;
-	
-	border-radius: 6px;	
+	height: 18px;
+	margin: 8px 0 0 36px;
+	width: 18px;	
+	border-radius: 9px;	
 }
 
 .zlg-screen-top input:active{
@@ -232,7 +251,7 @@
 }
 
 .zlg-btns-data ul {
-	height: 100px;
+	height: 75px;
 	overflow-x: hidden;
 	overflow-y: scroll;	
 }
@@ -405,6 +424,10 @@
 	border: 1px solid #ccc;
 	color: #ccc;
 	cursor: auto;
+}
+
+.zlg-not-found {
+	color: #f00;
 }
 
 .custom-c-t-hide {display: none;}

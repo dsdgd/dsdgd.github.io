@@ -8,6 +8,6 @@ function HTTP_GET($url){
 
 //$id = 409;
 //$URL = 'http://120.24.86.98:8088/Category_'.$id.'/Index.aspx?'.$_SERVER["QUERY_STRING"];
-$URL = 'http://120.24.86.98:8088/FilterDataJson.aspx?'.$_SERVER["QUERY_STRING"];
+$URL = 'http://120.24.86.98:8088/FilterDataJson_test.aspx?'.$_SERVER["QUERY_STRING"];
 HTTP_GET($URL);
 ?>

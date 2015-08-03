@@ -17,7 +17,8 @@
 	
     <div id="ZlgScreenTop" class="zlg-screen-top clearFix">
     	<span class="fl">产品筛选</span>
-        <input id="ZlgReset" class="fr" type="button" value="重置"/>
+    	<div id="ZlgPer" class="zlg-per fr"><div></div></div>
+        <input id="ZlgReset" class="fl" type="button" title="全部重置" value=""/>
     </div>
     
     <div id="ZlgScreenMain" class="zlg-screen-main"></div>
@@ -80,12 +81,13 @@ seajs.use('WebFilter/jQuery.webFilter.js', function (e){
 	});
 });
 */
+
 seajs.use('WebFilter/jQuery.webFilter.js', function (e){
 	e.init({
 		'url'		: 	'HTTP_GET_TOP.php',
 		'nodeid'	: 	2112 ,
 		'tName'		: 	'MCU',
-		'pagesize'	: 	20,
+		'pagesize'	: 	500,
 		'page'		: 	1,
 		'filter'	: 	'v_kernel=$M0$',
 		'title'	 	:	 'brand:品牌,PartSeries:芯片系列,Frequency:主频（MHz）,Flash:Flash,RAM:RAM(KB),EEPROM:EEPROM,TFT:TFT,Ethernet:Ethernet,USB:USB(总数),CAN:CAN,UART:UART,I2S:I2S,I2C:I2C,SPI:SPI,TSI:TSI,PWM:PWM',
@@ -93,6 +95,24 @@ seajs.use('WebFilter/jQuery.webFilter.js', function (e){
 		'ifShow'	: 	''		
 	});
 });
+
+
+
+/*	
+seajs.use('WebFilter/jQuery.webFilter.js', function (e){
+	e.init({
+		'url'		: 	'HTTP_GET_TOP.php',
+		'nodeid'	: 	2113,
+		'tName'		: 	'MCU',
+		'pagesize'	: 	30,
+		'page'		: 	1,
+		'filter'	: 	'v_kernel=$M7$$M4$$M4F$$M3$$M0$$M0plus$ AND v_lowpower=$1$$深度掉电,掉电,深度睡眠,睡眠$$深度掉电$$掉电$$深度睡眠$$睡眠$',
+		'title'	 	:	 'v_lowpower:低功耗,v_kernel:内核,brand:品牌,PartSeries:芯片系列,Frequency:主频（MHz）,Flash:Flash,RAM:RAM(KB),EEPROM:EEPROM,TFT:TFT,Ethernet:Ethernet,CAN:CAN,UART:UART,I2S:I2S,I2C:I2C,SPI:SPI,TSI:TSI,PWM:PWM',
+		'tabTitle' 	: 	'v_kernel:内核,brand:品牌,PartSeries:芯片系列,v_lowpower:低功耗,Frequency:主频（MHz）,Flash:Flash,RAM:RAM(KB),EEPROM:EEPROM,TFT:TFT,Ethernet:Ethernet,USB:USB(总数),CAN:CAN,UART:UART,I2S:I2S,I2C:I2C,SPI:SPI,TSI:TSI,PWM:PWM,ADC_Cnt:ADC_Cnt,ADC_ChnlCnt:ADC路数,DAC_Cnt:DAC_Cnt,DAC_ChnlCnt:DAC路数,DAC_BitCnt:DAC_BitCnt,ACMP:ACMP,GPIO:GPIO,TempRange:温度范围,Package:封装,Timer:Timer,QEI:QEI,LEUART:LEUART,USB_Host:USB_Host,ADC_BitCnt:ADC_BitCnt,USB_device:USB_device,USB_OTG:USB_OTG,RTC:RTC,OPAMP:OPAMP,EMC:EMC,LCD_com:LCD_com,LCD_seg:LCD_seg',
+		'ifShow'	: 	''		
+	});
+});
+*/
 </script>
 </body>
 </html>
