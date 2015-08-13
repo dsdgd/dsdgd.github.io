@@ -10,12 +10,12 @@ define("js/WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./dat
         //存放所有html集合
         var aId1 = [], aId2 = [], aJsonNum = [];
         //存放不同类型html集合
-        var aId01 = [], aId02 = [], aId03 = [], aId04 = [];
+        var aId01 = [], aId02 = [];
         //存放ID集合
         var iTimestamp = new Date().getTime();
         //当前时间戳
         var iNum1 = iTimestamp, iNum2 = iTimestamp;
-        var iNum01 = iTimestamp, iNum02 = iTimestamp, iNum03 = iTimestamp, iNum04 = iTimestamp;
+        var iNum01 = iTimestamp, iNum02 = iTimestamp;
         for (var i = 0; i < iLen1; i++) {
             //----只有一个参数值（0，空，-）的字段则不生成dom
             if (aData[i][aTitle[i]]["num"].length == 0 && aData[i][aTitle[i]]["str"].length == 0) {
@@ -28,7 +28,7 @@ define("js/WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./dat
             //----定义一组html
             var sHtml1 = $('<dl class="zlg-screen-cont clearFix"></dl>');
             var sHtml2 = $('<dt class="fl"></dt>');
-            var sHtml3 = $('<dd class="fl"></dd>');
+            var sHtml3 = $('<dd class="fr"></dd>');
             //----添加标题、属性
             sHtml2.attr("title", aAlias[i]);
             sHtml2.attr("data-name", aTitle[i]);
@@ -55,39 +55,26 @@ define("js/WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./dat
                 //----元素ID
                 var sId1 = "ZlgBtnsChosen" + ++iNum01;
                 var sId2 = "ZlgBtnsData" + ++iNum02;
-                var sId3 = "ZlgBtnsSubmit" + ++iNum03;
-                var sId4 = "ZlgBtnsSelect" + ++iNum04;
                 aId01.push(sId1);
                 aId02.push(sId2);
-                aId03.push(sId3);
-                aId04.push(sId4);
                 var sHtml4 = $('<div class="zlg-btns fr"></div>');
-                var sHtml5 = $('<div id="' + sId1 + '" class="zlg-btns-chosen" title="更多筛选参数" data-name="' + aTitle[i] + '"><div>更多筛选参数</div></div>');
-                var sHtml6 = $('<dl id="' + sId2 + '" class="zlg-btns-data"></dl>');
-                var sHtml7 = $('<dt class="clearFix"></dt>');
-                var sHtml8 = $('<input id="' + sId4 + '"  class="fl zlg-chosen-all" type="checkbox">');
-                var sHtml9 = $('<span class="fl">全选</span>');
-                var sHtml10 = $('<input id="' + sId3 + '" class="fr" type="button" value="提交" />');
-                var sHtml11 = $("<dd></dd>");
-                var sHtml12 = $("<ul></ul>");
-                var sHtml13 = "";
+                var sHtml5 = $('<div id="' + sId1 + '" class="zlg-btns-chosen" title="更多筛选参数">更多</div>');
+                var sHtml6 = $('<ul id="' + sId2 + '" class="zlg-btns-data" data-name="' + aTitle[i] + '"></ul>');
+                var sHtml7 = "";
                 for (var j in oRows) {
                     //拼接html
                     var iLen = oRows[j].length;
                     if (j === "str" && iLen > 0) {
                         for (var k = 0; k < iLen; k++) {
-                            sHtml13 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
+                            sHtml7 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
                         }
-                    } else if (j === "num" && iLen > 0) {
+                    } else if (j === "num" && iLen < 8) {
                         for (var k = 0; k < iLen; k++) {
-                            sHtml13 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
+                            sHtml7 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
                         }
                     }
                 }
-                sHtml7.append(sHtml8, sHtml9, sHtml10);
-                sHtml12.append(sHtml13);
-                sHtml11.append(sHtml12);
-                sHtml6.append(sHtml7, sHtml11);
+                sHtml6.append(sHtml7);
                 sHtml4.append(sHtml5, sHtml6);
                 sHtml3.append(sHtml4);
             }
@@ -103,7 +90,7 @@ define("js/WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./dat
         }
         for (var i = 0; i < aId01.length; i++) {
             //添加筛选按钮ui事件
-            require("./ui-checkbox").ui("#" + aId01[i], "#" + aId02[i], "#" + aId03[i], "#" + aId04[i], Json, config);
+            require("./ui-checkbox").ui("#" + aId01[i], "#" + aId02[i], Json, config);
         }
         //展现部分下拉框的关键词
         require("./ui-moreKey").ui(Json, config);

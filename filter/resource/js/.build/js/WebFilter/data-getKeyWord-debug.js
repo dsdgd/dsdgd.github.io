@@ -8,7 +8,7 @@ define("js/WebFilter/data-getKeyWord-debug", [], {
         //存放按钮关键字
         var oSliderKey = {};
         //存放拖拽滚动关键字
-        $(".zlg-more-btns").each(function() {
+        $(".zlg-more-btns, .zlg-btns-data").each(function() {
             //单选按钮
             var aTmp = [];
             var sTmp = $(this).attr("title");
