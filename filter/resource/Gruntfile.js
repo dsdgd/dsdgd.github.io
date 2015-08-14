@@ -30,19 +30,19 @@ module.exports = function(grunt) {
 			 webfilter : {
 				 files : {
 					 'js/dist/jQuery.webFilter.js' : [
-						 'js/.build/WebFilter/jQuery.webFilter.js',
-						 'js/.build/WebFilter/data-processing.js',
-						 'js/.build/WebFilter/ui-screening.js',
-						 'js/.build/WebFilter/ui-slider.js',
-						 'js/.build/WebFilter/ui-checkbox.js',
-						 'js/.build/WebFilter/ui-moreKey.js',
-						 'js/.build/WebFilter/ui-toggle.js',
-						 'js/.build/WebFilter/ui-reset.js',
-						 'js/.build/WebFilter/data-getKeyWord.js',
-						 'js/.build/WebFilter/data-ajax.js',
-						 'js/.build/WebFilter/ui-paging.js',
-						 'js/.build/WebFilter/ui-fixHead.js',
-						 'js/.build/WebFilter/ui-hoverBgColor.js'
+						 'js/.build/js/WebFilter/jQuery.webFilter.js',
+						 'js/.build/js/WebFilter/data-processing.js',
+						 'js/.build/js/WebFilter/ui-screening.js',
+						 'js/.build/js/WebFilter/ui-slider.js',
+						 'js/.build/js/WebFilter/ui-checkbox.js',
+						 'js/.build/js/WebFilter/ui-moreKey.js',
+						 'js/.build/js/WebFilter/ui-toggle.js',
+						 'js/.build/js/WebFilter/ui-reset.js',
+						 'js/.build/js/WebFilter/data-getKeyWord.js',
+						 'js/.build/js/WebFilter/data-ajax.js',
+						 'js/.build/js/WebFilter/ui-paging.js',
+						 'js/.build/js/WebFilter/ui-fixHead.js',
+						 'js/.build/js/WebFilter/ui-hoverBgColor.js'
 					 ]
 				 }
 			 }

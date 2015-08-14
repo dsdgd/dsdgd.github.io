@@ -3,7 +3,7 @@ define(function (require, exports, module){
 	
 	function init(obj, bool, append){//obj:表格对象, bool:左一栏锁定→true:锁定,false:不锁定 {'L':true, 'T':false}, append:存放复制的数据对象
 		
-		if( $(obj).size() != 0 ){
+		if( $(obj).size() > 0 ){
 
 			var oTmp1 = $('<table></table>');//顶部表头
 			var oTmp2 = $('<table></table>');//左侧表头
@@ -122,15 +122,22 @@ define(function (require, exports, module){
 			var iW = $(obj).width();
 			var iH = $(obj).height();
 
-			setInterval(function (){
-				iT != $(obj).offset().top ? iT = $(obj).offset().top : false;
-				iL != $(obj).offset().left ? iL = $(obj).offset().left : false;
+			var timer = setInterval(function (){
 
-				var iNowT = $(this).scrollTop();
-				var iNowL = $(this).scrollLeft();
+				if( !$(obj).offset() ){
+					clearInterval(timer)
+				}else{
+					iT != $(obj).offset().top ? iT = $(obj).offset().top : false;
+					iL != $(obj).offset().left ? iL = $(obj).offset().left : false;
 
-				move(iT, iL, iNowT, iNowL);
-			}, 30);
+					var iNowT = $(this).scrollTop();
+					var iNowL = $(this).scrollLeft();
+
+					move(iT, iL, iNowT, iNowL);					
+				}
+
+
+			}, 500);
 			
 			$(window).scroll(function (){
 

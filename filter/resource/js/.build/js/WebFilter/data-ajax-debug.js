@@ -27,128 +27,126 @@ define("js/WebFilter/data-ajax-debug", [ "./data-processing-debug", "./ui-hoverB
                     $("#ZlgResult").html('<div class="zlg-not-found">找不到相关数据</div>');
                     $("#ZlgPageInfo").html("");
                     $("#ZlgPageList").html("");
-                    return;
-                }
-                for (var i = -1; i < iLen1; i++) {
-                    //拼接表格html
-                    if (i < 0) {
-                        //表头
-                        for (var j = -1; j < iLen3; j++) {
-                            if (j < 0) {
-                                var sTd = "<td>产品名称</td>";
-                                sTmp1 += sTd;
-                            } else {
-                                for (var k = 0; k < iLen4; k++) {
-                                    if (oJson["Param"][j] == config["tabKey"][k]) {
-                                        var sTd = "<td>" + config["tabTitle"][k] + "</td>";
-                                        sTmp1 += sTd;
+                } else {
+                    for (var i = -1; i < iLen1; i++) {
+                        //拼接表格html
+                        if (i < 0) {
+                            //表头
+                            for (var j = -1; j < iLen3; j++) {
+                                if (j < 0) {
+                                    var sTd = "<td>产品名称</td>";
+                                    sTmp1 += sTd;
+                                } else {
+                                    for (var k = 0; k < iLen4; k++) {
+                                        if (oJson["Param"][j] == config["tabKey"][k]) {
+                                            var sTd = "<td>" + config["tabTitle"][k] + "</td>";
+                                            sTmp1 += sTd;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        sTmp2 += "<tr>" + sTmp1 + "</tr>";
-                        sTmp1 = "";
-                    } else {
-                        //表格
-                        var iLen = oJson["Rows"][i].length;
-                        for (var j = -1; j < iLen; j++) {
-                            if (j < 0) {
-                                var sTd = "<td>" + oJson["Item"][i] + "</td>";
-                                sTmp1 += sTd;
-                            } else {
-                                var sTd = "<td>" + oJson["Rows"][i][j] + "</td>";
-                                sTmp1 += sTd;
+                            sTmp2 += "<tr>" + sTmp1 + "</tr>";
+                            sTmp1 = "";
+                        } else {
+                            //表格
+                            var iLen = oJson["Rows"][i].length;
+                            for (var j = -1; j < iLen; j++) {
+                                if (j < 0) {
+                                    var sTd = "<td>" + oJson["Item"][i] + "</td>";
+                                    sTmp1 += sTd;
+                                } else {
+                                    var sTd = "<td>" + oJson["Rows"][i][j] + "</td>";
+                                    sTmp1 += sTd;
+                                }
                             }
+                            sTmp2 += "<tr>" + sTmp1 + "</tr>";
+                            sTmp1 = "";
                         }
-                        sTmp2 += "<tr>" + sTmp1 + "</tr>";
-                        sTmp1 = "";
                     }
-                }
-                var sTab = '<table id="SelectTable">' + sTmp2 + "</table>";
-                /**去除0与空**/
-                var result = $(sTab);
-                var iMax = result.children().children().size();
-                var aRm = [];
-                result.children().children(":first").children().each(function(i) {
-                    var obj = $(this).parent().siblings();
-                    var sum = 0;
-                    obj.each(function() {
-                        var o = $(this).children().eq(i).text();
-                        var oReg = /[\n\r]/g;
-                        if (o == "0" || o == "-" || o == " " || o == "") {
-                            sum++;
-                        } else if (o.search(oReg) != "-1") {
-                            sum++;
-                        }
-                    });
-                    if (sum == iMax - 1) {
-                        aRm.push(i);
-                    }
-                });
-                $(aRm).each(function(i) {
-                    result.children(":first").children().each(function() {
-                        $(this).children().each(function(j) {
-                            if (aRm[i] - i == j) {
-                                $(this).remove();
+                    var sTab = '<table id="SelectTable">' + sTmp2 + "</table>";
+                    /**去除0与空**/
+                    var result = $(sTab);
+                    var iMax = result.children().children().size();
+                    var aRm = [];
+                    result.children().children(":first").children().each(function(i) {
+                        var obj = $(this).parent().siblings();
+                        var sum = 0;
+                        obj.each(function() {
+                            var o = $(this).children().eq(i).text();
+                            var oReg = /[\n\r]/g;
+                            if (o == "0" || o == "-" || o == " " || o == "") {
+                                sum++;
+                            } else if (o.search(oReg) != "-1") {
+                                sum++;
                             }
                         });
+                        if (sum == iMax - 1) {
+                            aRm.push(i);
+                        }
                     });
-                });
-                /**去除0与空 end**/
-                var aRes = [];
-                //存放 result.children().children() 数据;
-                var aTmp = [];
-                //暂存
-                var iOnce = 10;
-                //每次生成的数据量
-                var oAfterTimer = null;
-                for (var i = 0; i < iMax; i++) {
-                    //分割Dom片段
-                    if (i != 0 && i % iOnce == 0 && i < iMax - 1) {
-                        aRes.push(aTmp);
-                        aTmp = [];
-                        aTmp.push(result.children().children().eq(i).clone());
-                    } else if (i == iMax - 1) {
-                        aRes.push(aTmp);
-                        aTmp = [];
-                        aTmp.push(result.children().children().eq(i).clone());
-                        aRes.push(aTmp);
-                    } else {
-                        aTmp.push(result.children().children().eq(i).clone());
-                    }
-                }
-                result.children().html("");
-                $("#ZlgResult").html(result);
-                var iLen = aRes.length;
-                var iResIndex = 0;
-                var iPer = 0;
-                clearInterval(oAfterTimer);
-                $("#ZlgPer").css("opacity", 1);
-                $("#ZlgPer").children(":first").css("width", iPer + "%");
-                oAfterTimer = setInterval(function() {
-                    if (iResIndex == iLen) {
-                        clearInterval(oAfterTimer);
-                        $("#ZlgPer").animate({
-                            opacity: 0
+                    $(aRm).each(function(i) {
+                        result.children(":first").children().each(function() {
+                            $(this).children().each(function(j) {
+                                if (aRm[i] - i == j) {
+                                    $(this).remove();
+                                }
+                            });
                         });
-                        page(oJson, URL, config);
-                        //分页
-                        setTimeout(function() {
+                    });
+                    /**去除0与空 end**/
+                    var aRes = [];
+                    //存放 result.children().children() 数据;
+                    var aTmp = [];
+                    //暂存
+                    var iOnce = 10;
+                    //每次生成的数据量
+                    var oAfterTimer = null;
+                    for (var i = 0; i < iMax; i++) {
+                        //分割Dom片段
+                        if (i != 0 && i % iOnce == 0 && i < iMax - 1) {
+                            aRes.push(aTmp);
+                            aTmp = [];
+                            aTmp.push(result.children().children().eq(i).clone());
+                        } else if (i == iMax - 1) {
+                            aRes.push(aTmp);
+                            aTmp = [];
+                            aTmp.push(result.children().children().eq(i).clone());
+                            aRes.push(aTmp);
+                        } else {
+                            aTmp.push(result.children().children().eq(i).clone());
+                        }
+                    }
+                    result.children().html("");
+                    $("#ZlgResult").html(result);
+                    var iLen = aRes.length;
+                    var iResIndex = 0;
+                    var iPer = 0;
+                    clearInterval(oAfterTimer);
+                    $("#ZlgPer").css("opacity", 1);
+                    $("#ZlgPer").children(":first").css("width", iPer + "%");
+                    page(oJson, URL, config);
+                    //分页
+                    oAfterTimer = setInterval(function() {
+                        if (iResIndex == iLen) {
+                            clearInterval(oAfterTimer);
+                            $("#ZlgPer").animate({
+                                opacity: 0
+                            });
                             require("./ui-hoverBgColor-debug").init("#SelectTable", "td-hover-bg");
                             require("./ui-fixHead-debug").init("#SelectTable", {
                                 L: true,
                                 T: true
                             }, "#ZlgResult");
-                        }, 300);
-                    } else {
-                        $(result).append(aRes[iResIndex]);
-                        iPer = iResIndex / (iLen - 1) * 100;
-                        $("#ZlgPer div:eq(0)").animate({
-                            width: iPer + "%"
-                        });
-                    }
-                    iResIndex++;
-                }, 500);
+                        } else {
+                            $(result).append(aRes[iResIndex]);
+                            iPer = iResIndex / (iLen - 1) * 100;
+                            $("#ZlgPer div:eq(0)").animate({
+                                width: iPer + "%"
+                            });
+                        }
+                        iResIndex++;
+                    }, 500);
+                }
             }
         });
     }
@@ -211,7 +209,7 @@ define("js/WebFilter/data-ajax-debug", [ "./data-processing-debug", "./ui-hoverB
                 }
                 iNowIndex = Number(iNowIndex);
                 //发送表头数据请求
-                var Reg = /page=\d&/g;
+                var Reg = /page=\d+&/g;
                 URL = URL.replace(Reg, "page=" + iNowIndex + "&");
                 init(URL, config);
             }

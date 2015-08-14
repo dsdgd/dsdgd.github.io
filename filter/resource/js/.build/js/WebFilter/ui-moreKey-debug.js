@@ -9,8 +9,8 @@ define("js/WebFilter/ui-moreKey-debug", [ "./data-getKeyWord-debug", "./data-aja
                 var sTmp2 = $('<ul class="clearFix"></ul');
                 var sTmp3 = null;
                 for (var i = 0; i < iMaxKey; i++) {
-                    sTmp3 = $(this).find("dd:first").find(".zlg-btns .zlg-btns-data ul:first").children(":first").clone();
-                    $(this).find("dd:first").find(".zlg-btns .zlg-btns-data ul:first").children(":first").remove();
+                    sTmp3 = $(this).find("dd:first").find(".zlg-btns-data").children(":first").clone();
+                    $(this).find("dd:first").find(".zlg-btns-data").children(":first").remove();
                     sTmp2.append(sTmp3);
                 }
                 sTmp1.append(sTmp2);
@@ -18,11 +18,11 @@ define("js/WebFilter/ui-moreKey-debug", [ "./data-getKeyWord-debug", "./data-aja
             }
         });
         $(".zlg-btns-data").each(function(i) {
-            if ($(this).find("dd ul li").size() == 0) {
+            if ($(this).find("li").size() == 0) {
                 $(this).parent().remove();
             }
         });
-        $(".zlg-more-btns input:checkbox").click(function() {
+        $(".zlg-more-btns input:checkbox, .zlg-btns-data input:checkbox").click(function() {
             var sUrl = require("./data-getKeyWord-debug").init(Json, config);
             require("./data-ajax-debug").init(sUrl, config);
         });

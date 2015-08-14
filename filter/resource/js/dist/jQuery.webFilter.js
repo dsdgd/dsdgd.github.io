@@ -1,5 +1,5 @@
 //初始化
-define("WebFilter/jQuery.webFilter", [ "./data-processing", "./ui-screening", "./ui-slider", "./data-getKeyWord", "./data-ajax", "./ui-hoverBgColor", "./ui-fixHead", "./ui-checkbox", "./ui-moreKey", "./ui-toggle", "./ui-reset" ], function(require, exports, module) {
+define("js/WebFilter/jQuery.webFilter", [ "./data-processing", "./ui-screening", "./ui-slider", "./data-getKeyWord", "./data-ajax", "./ui-hoverBgColor", "./ui-fixHead", "./ui-checkbox", "./ui-moreKey", "./ui-toggle", "./ui-reset" ], function(require, exports, module) {
     function init(config) {
         /***************************************************
 *
@@ -111,7 +111,7 @@ function findIndex(arr, num) {
 }
 
 //数据解析模块
-define("WebFilter/data-processing", [], function(require, exports, module) {
+define("js/WebFilter/data-processing", [], function(require, exports, module) {
     function init(Json, bFirst, config) {
         //Json：数据, bFirst：true为筛选参数，false为表格数据
         bFirst ? Json["Param"] = config["key"] : Json["Param"] = config["tabKey"];
@@ -243,7 +243,7 @@ define("WebFilter/data-processing", [], function(require, exports, module) {
 });
 
 //筛选数据UI
-define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead", "./ui-checkbox", "./ui-moreKey" ], function(require, exports, module) {
+define("js/WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead", "./ui-checkbox", "./ui-moreKey" ], function(require, exports, module) {
     function ui(Json, config) {
         var aTitle = Json["Param"];
         var aData = Json["Rows"];
@@ -254,12 +254,12 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
         //存放所有html集合
         var aId1 = [], aId2 = [], aJsonNum = [];
         //存放不同类型html集合
-        var aId01 = [], aId02 = [], aId03 = [], aId04 = [];
+        var aId01 = [], aId02 = [];
         //存放ID集合
         var iTimestamp = new Date().getTime();
         //当前时间戳
         var iNum1 = iTimestamp, iNum2 = iTimestamp;
-        var iNum01 = iTimestamp, iNum02 = iTimestamp, iNum03 = iTimestamp, iNum04 = iTimestamp;
+        var iNum01 = iTimestamp, iNum02 = iTimestamp;
         for (var i = 0; i < iLen1; i++) {
             //----只有一个参数值（0，空，-）的字段则不生成dom
             if (aData[i][aTitle[i]]["num"].length == 0 && aData[i][aTitle[i]]["str"].length == 0) {
@@ -272,7 +272,7 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
             //----定义一组html
             var sHtml1 = $('<dl class="zlg-screen-cont clearFix"></dl>');
             var sHtml2 = $('<dt class="fl"></dt>');
-            var sHtml3 = $('<dd class="fl"></dd>');
+            var sHtml3 = $('<dd class="fr"></dd>');
             //----添加标题、属性
             sHtml2.attr("title", aAlias[i]);
             sHtml2.attr("data-name", aTitle[i]);
@@ -299,39 +299,26 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
                 //----元素ID
                 var sId1 = "ZlgBtnsChosen" + ++iNum01;
                 var sId2 = "ZlgBtnsData" + ++iNum02;
-                var sId3 = "ZlgBtnsSubmit" + ++iNum03;
-                var sId4 = "ZlgBtnsSelect" + ++iNum04;
                 aId01.push(sId1);
                 aId02.push(sId2);
-                aId03.push(sId3);
-                aId04.push(sId4);
                 var sHtml4 = $('<div class="zlg-btns fr"></div>');
-                var sHtml5 = $('<div id="' + sId1 + '" class="zlg-btns-chosen" title="更多筛选参数" data-name="' + aTitle[i] + '"><div>更多筛选参数</div></div>');
-                var sHtml6 = $('<dl id="' + sId2 + '" class="zlg-btns-data"></dl>');
-                var sHtml7 = $('<dt class="clearFix"></dt>');
-                var sHtml8 = $('<input id="' + sId4 + '"  class="fl zlg-chosen-all" type="checkbox">');
-                var sHtml9 = $('<span class="fl">全选</span>');
-                var sHtml10 = $('<input id="' + sId3 + '" class="fr" type="button" value="提交" />');
-                var sHtml11 = $("<dd></dd>");
-                var sHtml12 = $("<ul></ul>");
-                var sHtml13 = "";
+                var sHtml5 = $('<div id="' + sId1 + '" class="zlg-btns-chosen" title="更多筛选参数">更多</div>');
+                var sHtml6 = $('<ul id="' + sId2 + '" class="zlg-btns-data" data-name="' + aTitle[i] + '"></ul>');
+                var sHtml7 = "";
                 for (var j in oRows) {
                     //拼接html
                     var iLen = oRows[j].length;
                     if (j === "str" && iLen > 0) {
                         for (var k = 0; k < iLen; k++) {
-                            sHtml13 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
+                            sHtml7 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
                         }
-                    } else if (j === "num" && iLen > 0) {
+                    } else if (j === "num" && iLen < 8) {
                         for (var k = 0; k < iLen; k++) {
-                            sHtml13 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
+                            sHtml7 += '<li title="' + oRows[j][k] + '"><input type="checkbox">' + oRows[j][k] + "</li>";
                         }
                     }
                 }
-                sHtml7.append(sHtml8, sHtml9, sHtml10);
-                sHtml12.append(sHtml13);
-                sHtml11.append(sHtml12);
-                sHtml6.append(sHtml7, sHtml11);
+                sHtml6.append(sHtml7);
                 sHtml4.append(sHtml5, sHtml6);
                 sHtml3.append(sHtml4);
             }
@@ -347,7 +334,7 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
         }
         for (var i = 0; i < aId01.length; i++) {
             //添加筛选按钮ui事件
-            require("./ui-checkbox").ui("#" + aId01[i], "#" + aId02[i], "#" + aId03[i], "#" + aId04[i], Json, config);
+            require("./ui-checkbox").ui("#" + aId01[i], "#" + aId02[i], Json, config);
         }
         //展现部分下拉框的关键词
         require("./ui-moreKey").ui(Json, config);
@@ -356,7 +343,7 @@ define("WebFilter/ui-screening", [ "./ui-slider", "./data-getKeyWord", "./data-a
 });
 
 //拖拽事件
-define("WebFilter/ui-slider", [ "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
+define("js/WebFilter/ui-slider", [ "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
     function ui(Parent, Child, Arr, Json, config) {
         var iLens = Arr.length;
         //数组长度
@@ -420,72 +407,46 @@ define("WebFilter/ui-slider", [ "./data-getKeyWord", "./data-ajax", "./data-proc
 });
 
 //筛选按钮事件
-define("WebFilter/ui-checkbox", [ "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
-    function ui(oParent, oChild, oBtn, oSelect, Json, config) {
+define("js/WebFilter/ui-checkbox", [], function(require, exports, module) {
+    function ui(oParent, oChild, Json, config) {
+        var bStatus = false;
+        //收起
+        var iPH = 0;
         //参数展开、收起
         $(oParent).click(function(e) {
-            var iT = $("#ZlgScreenMain").offset().top;
-            var iB = $("#ZlgToggle").offset().top;
-            var iO = $(oParent).offset().top;
-            if (iO - iT < iB - iO) {
-                //定位
-                $(oChild).css("top", "-4px");
+            //------------------------------------------今天写到展开收起
+            bStatus = !bStatus;
+            var iH = $(oChild).innerHeight();
+            var iHp = 0;
+            var sText = "";
+            if (bStatus) {
+                iHp = $(this).parent().parent().innerHeight() + iH;
+                sText = "收起";
+                iPH = $("#ZlgScreenMain").outerHeight() + iH;
             } else {
-                $(oChild).css("top", "");
+                iHp = $(this).parent().parent().innerHeight() - iH;
+                sText = "更多";
+                iPH = $("#ZlgScreenMain").outerHeight() - iH;
             }
+            $(this).parent().parent().animate({
+                height: iHp + "px"
+            });
+            $("#ZlgScreenMain").animate({
+                height: iPH + "px"
+            });
             $(oChild).toggle();
+            $(oParent).html(sText);
             e.stopPropagation();
         });
         $(oChild).click(function(e) {
             e.stopPropagation();
-        });
-        $(oBtn).click(function() {
-            var sVal = "";
-            $(oChild).hide();
-            $(oChild).find("dd input[type=checkbox]").each(function() {
-                if ($(this).prop("checked")) {
-                    sVal += $(this).parent().attr("title") + ",";
-                }
-            });
-            sVal = sVal.substring(0, sVal.length - 1);
-            if (sVal.length > 0) {
-                $(oParent).attr("title", sVal);
-                $(oParent).children().html(sVal);
-                $(oParent).children().addClass("chosen-filter-color");
-            } else {
-                $(oParent).attr("title", "更多筛选参数");
-                $(oParent).children().html("更多筛选参数");
-                $(oParent).children().removeClass("chosen-filter-color");
-            }
-            //这里需要提交一次Ajax
-            var sUrl = require("./data-getKeyWord").init(Json, config);
-            require("./data-ajax").init(sUrl, config);
-        });
-        $("body").click(function() {
-            if ($(oChild).css("display") == "block") {
-                $(oChild).hide();
-            }
-        });
-        //checkbox全选、反选
-        $(oSelect).click(function() {
-            if ($(this).prop("checked")) {
-                $(this).next("span").html("反选");
-                $(oChild).find("dd input[type=checkbox]").prop({
-                    checked: true
-                });
-            } else {
-                $(this).next("span").html("全选");
-                $(oChild).find("dd input[type=checkbox]").prop({
-                    checked: false
-                });
-            }
         });
     }
     exports.ui = ui;
 });
 
 //展现部分关键词
-define("WebFilter/ui-moreKey", [ "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
+define("js/WebFilter/ui-moreKey", [ "./data-getKeyWord", "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
     function ui(Json, config) {
         //展现部分关键词
         var iMaxKey = 4;
@@ -495,8 +456,8 @@ define("WebFilter/ui-moreKey", [ "./data-getKeyWord", "./data-ajax", "./data-pro
                 var sTmp2 = $('<ul class="clearFix"></ul');
                 var sTmp3 = null;
                 for (var i = 0; i < iMaxKey; i++) {
-                    sTmp3 = $(this).find("dd:first").find(".zlg-btns .zlg-btns-data ul:first").children(":first").clone();
-                    $(this).find("dd:first").find(".zlg-btns .zlg-btns-data ul:first").children(":first").remove();
+                    sTmp3 = $(this).find("dd:first").find(".zlg-btns-data").children(":first").clone();
+                    $(this).find("dd:first").find(".zlg-btns-data").children(":first").remove();
                     sTmp2.append(sTmp3);
                 }
                 sTmp1.append(sTmp2);
@@ -504,11 +465,11 @@ define("WebFilter/ui-moreKey", [ "./data-getKeyWord", "./data-ajax", "./data-pro
             }
         });
         $(".zlg-btns-data").each(function(i) {
-            if ($(this).find("dd ul li").size() == 0) {
+            if ($(this).find("li").size() == 0) {
                 $(this).parent().remove();
             }
         });
-        $(".zlg-more-btns input:checkbox").click(function() {
+        $(".zlg-more-btns input:checkbox, .zlg-btns-data input:checkbox").click(function() {
             var sUrl = require("./data-getKeyWord").init(Json, config);
             require("./data-ajax").init(sUrl, config);
         });
@@ -517,20 +478,27 @@ define("WebFilter/ui-moreKey", [ "./data-getKeyWord", "./data-ajax", "./data-pro
 });
 
 //展开收起筛选参数
-define("WebFilter/ui-toggle", [], function(require, exports, module) {
+define("js/WebFilter/ui-toggle", [], function(require, exports, module) {
     function ui() {
-        var iSize = $("#ZlgScreenMain").children().size();
-        var sBeforeH = $("#ZlgScreenMain").height();
-        var sAfterH = ($("#ZlgScreenMain").children(":first-child").outerHeight(true) + 1) * iSize;
+        var iSize = 5;
+        //默认显示个数
         $("#ZlgToggle").click(function() {
             if ($(this).attr("data-toggle") == "show") {
                 //展开
+                var sAfterH = 0;
+                $("#ZlgScreenMain").children().each(function() {
+                    sAfterH += $(this).outerHeight(true);
+                });
                 $(this).attr("data-toggle", "hide").text("收起部分选项");
                 $("#ZlgScreenMain").animate({
                     height: sAfterH + "px"
                 });
             } else {
                 //收起
+                var sBeforeH = 0;
+                $("#ZlgScreenMain").children().each(function(i) {
+                    i < iSize ? sBeforeH += $(this).outerHeight(true) : false;
+                });
                 $(this).attr("data-toggle", "show").text("显示全部选项");
                 $("#ZlgScreenMain").animate({
                     height: sBeforeH + "px"
@@ -542,7 +510,7 @@ define("WebFilter/ui-toggle", [], function(require, exports, module) {
 });
 
 //重置所有参数
-define("WebFilter/ui-reset", [ "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead", "./data-getKeyWord" ], function(require, exports, moudle) {
+define("js/WebFilter/ui-reset", [ "./data-ajax", "./data-processing", "./ui-hoverBgColor", "./ui-fixHead", "./data-getKeyWord" ], function(require, exports, moudle) {
     function init(obj, config, Json, url) {
         if (url) {
             //全部重置
@@ -633,7 +601,7 @@ define("WebFilter/ui-reset", [ "./data-ajax", "./data-processing", "./ui-hoverBg
 });
 
 //获取筛选值并返回URL
-define("WebFilter/data-getKeyWord", [], {
+define("js/WebFilter/data-getKeyWord", [], {
     init: function(Json, config) {
         var sUrl = "";
         var JsonData = Json["Rows"];
@@ -642,7 +610,7 @@ define("WebFilter/data-getKeyWord", [], {
         //存放按钮关键字
         var oSliderKey = {};
         //存放拖拽滚动关键字
-        $(".zlg-more-btns").each(function() {
+        $(".zlg-more-btns, .zlg-btns-data").each(function() {
             //单选按钮
             var aTmp = [];
             var sTmp = $(this).attr("title");
@@ -721,7 +689,7 @@ define("WebFilter/data-getKeyWord", [], {
 });
 
 //ajax请求
-define("WebFilter/data-ajax", [ "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
+define("js/WebFilter/data-ajax", [ "./data-processing", "./ui-hoverBgColor", "./ui-fixHead" ], function(require, exports, module) {
     function init(URL, config) {
         $.ajax({
             async: true,
@@ -749,128 +717,126 @@ define("WebFilter/data-ajax", [ "./data-processing", "./ui-hoverBgColor", "./ui-
                     $("#ZlgResult").html('<div class="zlg-not-found">找不到相关数据</div>');
                     $("#ZlgPageInfo").html("");
                     $("#ZlgPageList").html("");
-                    return;
-                }
-                for (var i = -1; i < iLen1; i++) {
-                    //拼接表格html
-                    if (i < 0) {
-                        //表头
-                        for (var j = -1; j < iLen3; j++) {
-                            if (j < 0) {
-                                var sTd = "<td>产品名称</td>";
-                                sTmp1 += sTd;
-                            } else {
-                                for (var k = 0; k < iLen4; k++) {
-                                    if (oJson["Param"][j] == config["tabKey"][k]) {
-                                        var sTd = "<td>" + config["tabTitle"][k] + "</td>";
-                                        sTmp1 += sTd;
+                } else {
+                    for (var i = -1; i < iLen1; i++) {
+                        //拼接表格html
+                        if (i < 0) {
+                            //表头
+                            for (var j = -1; j < iLen3; j++) {
+                                if (j < 0) {
+                                    var sTd = "<td>产品名称</td>";
+                                    sTmp1 += sTd;
+                                } else {
+                                    for (var k = 0; k < iLen4; k++) {
+                                        if (oJson["Param"][j] == config["tabKey"][k]) {
+                                            var sTd = "<td>" + config["tabTitle"][k] + "</td>";
+                                            sTmp1 += sTd;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        sTmp2 += "<tr>" + sTmp1 + "</tr>";
-                        sTmp1 = "";
-                    } else {
-                        //表格
-                        var iLen = oJson["Rows"][i].length;
-                        for (var j = -1; j < iLen; j++) {
-                            if (j < 0) {
-                                var sTd = "<td>" + oJson["Item"][i] + "</td>";
-                                sTmp1 += sTd;
-                            } else {
-                                var sTd = "<td>" + oJson["Rows"][i][j] + "</td>";
-                                sTmp1 += sTd;
+                            sTmp2 += "<tr>" + sTmp1 + "</tr>";
+                            sTmp1 = "";
+                        } else {
+                            //表格
+                            var iLen = oJson["Rows"][i].length;
+                            for (var j = -1; j < iLen; j++) {
+                                if (j < 0) {
+                                    var sTd = "<td>" + oJson["Item"][i] + "</td>";
+                                    sTmp1 += sTd;
+                                } else {
+                                    var sTd = "<td>" + oJson["Rows"][i][j] + "</td>";
+                                    sTmp1 += sTd;
+                                }
                             }
+                            sTmp2 += "<tr>" + sTmp1 + "</tr>";
+                            sTmp1 = "";
                         }
-                        sTmp2 += "<tr>" + sTmp1 + "</tr>";
-                        sTmp1 = "";
                     }
-                }
-                var sTab = '<table id="SelectTable">' + sTmp2 + "</table>";
-                /**去除0与空**/
-                var result = $(sTab);
-                var iMax = result.children().children().size();
-                var aRm = [];
-                result.children().children(":first").children().each(function(i) {
-                    var obj = $(this).parent().siblings();
-                    var sum = 0;
-                    obj.each(function() {
-                        var o = $(this).children().eq(i).text();
-                        var oReg = /[\n\r]/g;
-                        if (o == "0" || o == "-" || o == " " || o == "") {
-                            sum++;
-                        } else if (o.search(oReg) != "-1") {
-                            sum++;
-                        }
-                    });
-                    if (sum == iMax - 1) {
-                        aRm.push(i);
-                    }
-                });
-                $(aRm).each(function(i) {
-                    result.children(":first").children().each(function() {
-                        $(this).children().each(function(j) {
-                            if (aRm[i] - i == j) {
-                                $(this).remove();
+                    var sTab = '<table id="SelectTable">' + sTmp2 + "</table>";
+                    /**去除0与空**/
+                    var result = $(sTab);
+                    var iMax = result.children().children().size();
+                    var aRm = [];
+                    result.children().children(":first").children().each(function(i) {
+                        var obj = $(this).parent().siblings();
+                        var sum = 0;
+                        obj.each(function() {
+                            var o = $(this).children().eq(i).text();
+                            var oReg = /[\n\r]/g;
+                            if (o == "0" || o == "-" || o == " " || o == "") {
+                                sum++;
+                            } else if (o.search(oReg) != "-1") {
+                                sum++;
                             }
                         });
+                        if (sum == iMax - 1) {
+                            aRm.push(i);
+                        }
                     });
-                });
-                /**去除0与空 end**/
-                var aRes = [];
-                //存放 result.children().children() 数据;
-                var aTmp = [];
-                //暂存
-                var iOnce = 10;
-                //每次生成的数据量
-                var oAfterTimer = null;
-                for (var i = 0; i < iMax; i++) {
-                    //分割Dom片段
-                    if (i != 0 && i % iOnce == 0 && i < iMax - 1) {
-                        aRes.push(aTmp);
-                        aTmp = [];
-                        aTmp.push(result.children().children().eq(i).clone());
-                    } else if (i == iMax - 1) {
-                        aRes.push(aTmp);
-                        aTmp = [];
-                        aTmp.push(result.children().children().eq(i).clone());
-                        aRes.push(aTmp);
-                    } else {
-                        aTmp.push(result.children().children().eq(i).clone());
-                    }
-                }
-                result.children().html("");
-                $("#ZlgResult").html(result);
-                var iLen = aRes.length;
-                var iResIndex = 0;
-                var iPer = 0;
-                clearInterval(oAfterTimer);
-                $("#ZlgPer").css("opacity", 1);
-                $("#ZlgPer").children(":first").css("width", iPer + "%");
-                oAfterTimer = setInterval(function() {
-                    if (iResIndex == iLen) {
-                        clearInterval(oAfterTimer);
-                        $("#ZlgPer").animate({
-                            opacity: 0
+                    $(aRm).each(function(i) {
+                        result.children(":first").children().each(function() {
+                            $(this).children().each(function(j) {
+                                if (aRm[i] - i == j) {
+                                    $(this).remove();
+                                }
+                            });
                         });
-                        page(oJson, URL, config);
-                        //分页
-                        setTimeout(function() {
+                    });
+                    /**去除0与空 end**/
+                    var aRes = [];
+                    //存放 result.children().children() 数据;
+                    var aTmp = [];
+                    //暂存
+                    var iOnce = 10;
+                    //每次生成的数据量
+                    var oAfterTimer = null;
+                    for (var i = 0; i < iMax; i++) {
+                        //分割Dom片段
+                        if (i != 0 && i % iOnce == 0 && i < iMax - 1) {
+                            aRes.push(aTmp);
+                            aTmp = [];
+                            aTmp.push(result.children().children().eq(i).clone());
+                        } else if (i == iMax - 1) {
+                            aRes.push(aTmp);
+                            aTmp = [];
+                            aTmp.push(result.children().children().eq(i).clone());
+                            aRes.push(aTmp);
+                        } else {
+                            aTmp.push(result.children().children().eq(i).clone());
+                        }
+                    }
+                    result.children().html("");
+                    $("#ZlgResult").html(result);
+                    var iLen = aRes.length;
+                    var iResIndex = 0;
+                    var iPer = 0;
+                    clearInterval(oAfterTimer);
+                    $("#ZlgPer").css("opacity", 1);
+                    $("#ZlgPer").children(":first").css("width", iPer + "%");
+                    page(oJson, URL, config);
+                    //分页
+                    oAfterTimer = setInterval(function() {
+                        if (iResIndex == iLen) {
+                            clearInterval(oAfterTimer);
+                            $("#ZlgPer").animate({
+                                opacity: 0
+                            });
                             require("./ui-hoverBgColor").init("#SelectTable", "td-hover-bg");
                             require("./ui-fixHead").init("#SelectTable", {
                                 L: true,
                                 T: true
                             }, "#ZlgResult");
-                        }, 300);
-                    } else {
-                        $(result).append(aRes[iResIndex]);
-                        iPer = iResIndex / (iLen - 1) * 100;
-                        $("#ZlgPer div:eq(0)").animate({
-                            width: iPer + "%"
-                        });
-                    }
-                    iResIndex++;
-                }, 500);
+                        } else {
+                            $(result).append(aRes[iResIndex]);
+                            iPer = iResIndex / (iLen - 1) * 100;
+                            $("#ZlgPer div:eq(0)").animate({
+                                width: iPer + "%"
+                            });
+                        }
+                        iResIndex++;
+                    }, 500);
+                }
             }
         });
     }
@@ -933,7 +899,7 @@ define("WebFilter/data-ajax", [ "./data-processing", "./ui-hoverBgColor", "./ui-
                 }
                 iNowIndex = Number(iNowIndex);
                 //发送表头数据请求
-                var Reg = /page=\d&/g;
+                var Reg = /page=\d+&/g;
                 URL = URL.replace(Reg, "page=" + iNowIndex + "&");
                 init(URL, config);
             }
@@ -942,60 +908,11 @@ define("WebFilter/data-ajax", [ "./data-processing", "./ui-hoverBgColor", "./ui-
     exports.init = init;
 });
 
-//分页
-define("WebFilter/ui-paging", [], function(require, exports, module) {
-    function init(Json, URL, config) {
-        var iMaxCount = Json["Count"];
-        //分页总数
-        var iPageSize = config["pagesize"];
-        //单页数据量
-        var iNowSize = Json["Rows"].length;
-        //当前记录量
-        var iNowIndex = Json["Index"];
-        //当前页码
-        var iMaxNum = 10;
-        //最大页码按钮量
-        var sBtn = "";
-        //存放页码按钮html
-        $("#ZlgPageInfo").find("strong:first").html(iNowIndex + 1);
-        $("#ZlgPageInfo").find("strong:last").html(iMaxCount);
-        for (var i = 0; i < iMaxCount + 4; i++) {
-            switch (i) {
-              case 0:
-                sBtn += '<span data-index="first">首页</span>';
-                break;
-
-              case 1:
-                sBtn += '<span class="zlg-page-list-hide" data-index="prev">上一页</span>';
-                break;
-
-              case 2:
-                sBtn += '<span class="zlg-page-list-active" data-index="1">' + (i - 1) + "</span>";
-                break;
-
-              case iMaxCount + 2:
-                sBtn += '<span data-index="next">下一页</span>';
-                break;
-
-              case iMaxCount + 3:
-                sBtn += '<span data-index="last">末页</span>';
-                break;
-
-              default:
-                sBtn += '<span data-index="' + (i - 1) + '">' + (i - 1) + "</span>";
-                break;
-            }
-        }
-        $("#ZlgPageList").html(sBtn);
-    }
-    exports.init = init;
-});
-
 //表格头部固定事件
-define("WebFilter/ui-fixHead", [], function(require, exports, module) {
+define("js/WebFilter/ui-fixHead", [], function(require, exports, module) {
     function init(obj, bool, append) {
         //obj:表格对象, bool:左一栏锁定→true:锁定,false:不锁定 {'L':true, 'T':false}, append:存放复制的数据对象
-        if ($(obj).size() != 0) {
+        if ($(obj).size() > 0) {
             var oTmp1 = $("<table></table>");
             //顶部表头
             var oTmp2 = $("<table></table>");
@@ -1098,13 +1015,17 @@ define("WebFilter/ui-fixHead", [], function(require, exports, module) {
             var iL = $(obj).offset().left;
             var iW = $(obj).width();
             var iH = $(obj).height();
-            setInterval(function() {
-                iT != $(obj).offset().top ? iT = $(obj).offset().top : false;
-                iL != $(obj).offset().left ? iL = $(obj).offset().left : false;
-                var iNowT = $(this).scrollTop();
-                var iNowL = $(this).scrollLeft();
-                move(iT, iL, iNowT, iNowL);
-            }, 30);
+            var timer = setInterval(function() {
+                if (!$(obj).offset()) {
+                    clearInterval(timer);
+                } else {
+                    iT != $(obj).offset().top ? iT = $(obj).offset().top : false;
+                    iL != $(obj).offset().left ? iL = $(obj).offset().left : false;
+                    var iNowT = $(this).scrollTop();
+                    var iNowL = $(this).scrollLeft();
+                    move(iT, iL, iNowT, iNowL);
+                }
+            }, 500);
             $(window).scroll(function() {
                 var iNowT = $(this).scrollTop();
                 var iNowL = $(this).scrollLeft();
@@ -1249,7 +1170,7 @@ define("WebFilter/ui-fixHead", [], function(require, exports, module) {
 });
 
 //表格hover背景事件
-define("WebFilter/ui-hoverBgColor", [], function(require, exports, moudle) {
+define("js/WebFilter/ui-hoverBgColor", [], function(require, exports, moudle) {
     function init(obj, hoverClass) {
         var iIndex1 = 0;
         var iIndex2 = 0;
