@@ -6,11 +6,9 @@ define(function (require, exports, module){
 		var iLens = Arr.length;					//数组长度
 		var iMin = 0;						//滚动范围最小值
 		var iMax = 100;				//滚动范围最大值	
-		var iStep = parseFloat(iMax/(iLens-1));	//步长0~10长度11，需走10步1
+		var iStep = Math.round(iMax/(iLens-1));	//步长0~10长度11，需走10步1
 		var aValues = [0, 100];
 		var bReady = true;	//阻止函数重复执行
-		
-		
 		
 		$(Child).find('input').bind('blur keydown', function(e){
 			

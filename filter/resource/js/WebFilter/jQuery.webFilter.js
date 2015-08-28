@@ -43,6 +43,8 @@ config = {
 			};
 				
 			var sData = 'nodeid='+config['nodeid']+'&tName='+config['tName']+'&pagesize='+100000+'&page='+config['page']+'&filter='+config['filter'];
+			sData = encodeURI(sData);
+			sData = sData.replace(/[+]/g, '%2b');
 			
 			$.ajax({
 				async: true,
@@ -78,6 +80,7 @@ config = {
 					var sData = 'nodeid='+config['nodeid']+'&tName='+config['tName']+'&pagesize='+config['pagesize']+'&page='+config['page']+'&filter='+config['filter'];
 					var sUrl = config['url'] + '?' + sData;
 					sUrl = encodeURI(sUrl);
+					sUrl = sUrl.replace('+', '%2b');
 					require('./data-ajax.js').init(sUrl, config);
 					
 					//重置UI

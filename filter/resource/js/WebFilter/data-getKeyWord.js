@@ -88,7 +88,8 @@ define({
         sUrl = config['url']+'?nodeid='+config['nodeid']+'&tName='+config['tName']+'&pagesize='+config['pagesize']+'&page='+config['page']+'&filter='+sUrl+config['filter'];
         
         sUrl = encodeURI(sUrl);
-        
+        sUrl = sUrl.replace(/[+]/g, '%2b');
+		console.log(sUrl)
         return sUrl;
     }
 });

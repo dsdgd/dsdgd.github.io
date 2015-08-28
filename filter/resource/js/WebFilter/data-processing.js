@@ -100,14 +100,15 @@ define(function(require, exports, module) {
         for(var i = 0; i < iLen4; i++){//数据分组添加→str、num
 
             var iLen = Json['Rows'][i].length;
-
+            
             for(var j = 0; j < iLen; j++){
-                
+
                 if( Json['Rows'][i][j] != '' && !isNaN( Json['Rows'][i][j] ) ){//不为空且是数字
 
                     for(var k in aData[j]){//数字
                         aData[j][k]['num'].push(Json['Rows'][i][j]);
                     }
+
                 }else if( Json['Rows'][i][j] != '' ){//不为空
 
                     for(var k in aData[j]){//字符串
@@ -115,6 +116,15 @@ define(function(require, exports, module) {
                         if( Json['Rows'][i][j].indexOf(',') != -1 ){
 
                             aTmp = Json['Rows'][i][j].split(',');//逗号字段分割
+                            
+                            for(var n = 0; n < aTmp.length; n++){//检测分割后的数据是否为数字，如果是则添加到num中
+                                if( !isNaN( aTmp[n] ) ){
+                                    aData[j][k]['num'].push( parseFloat(aTmp[n]) );
+                                    aTmp.splice(n,1);
+                                    n--;
+                                }
+                            };
+
                             aData[j][k]['str'] = aData[j][k]['str'].concat(aTmp);
 
                         }else{
@@ -141,7 +151,7 @@ define(function(require, exports, module) {
             delete Json['Title'];
             Json['Item'] = aProduct;
         };
-
+        
         return Json;
     };
     exports.init = init;
